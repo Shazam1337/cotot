@@ -1,0 +1,328 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #070807;
+  --bg-elevated: #0c0e0c;
+  --surface: #101310;
+  --surface-hover: #151915;
+  --border: rgba(255, 255, 255, 0.09);
+  --border-strong: rgba(255, 255, 255, 0.15);
+
+  --text-primary: #f1f2ea;
+  --text-secondary: #9da39a;
+  --text-muted: #666d65;
+
+  --lime: #b7ff3c;
+  --lime-soft: rgba(183, 255, 60, 0.12);
+  --amber: #ff9a3d;
+  --red: #ff5d55;
+
+  --font-sans: var(--font-supreme), "Arial Nova", "Helvetica Neue", Helvetica,
+    Arial, sans-serif;
+  --font-display: var(--font-kulag-sha), "Arial Nova", "Helvetica Neue",
+    Helvetica, Arial, sans-serif;
+  --font-mono: "SFMono-Regular", "Cascadia Code", "Roboto Mono", Consolas,
+    monospace;
+
+  --container: 1488px;
+  --gutter: clamp(40px, 4vw, 64px);
+  --section-space: clamp(112px, 10vw, 168px);
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-elevated: var(--bg-elevated);
+  --color-surface: var(--surface);
+  --color-surface-hover: var(--surface-hover);
+  --color-border: var(--border);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-lime: var(--lime);
+  --color-lime-soft: var(--lime-soft);
+  --color-amber: var(--amber);
+  --color-red: var(--red);
+  --font-sans: var(--font-sans);
+  --font-display: var(--font-display);
+  --font-mono: var(--font-mono);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 1024px;
+  background: var(--bg);
+  color-scheme: dark;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  background: var(--bg);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+::selection {
+  background: var(--lime);
+  color: var(--bg);
+}
+
+.site-shell {
+  position: relative;
+  isolation: isolate;
+  min-height: 100svh;
+  overflow-x: clip;
+  background:
+    radial-gradient(
+      circle at 71% 33%,
+      rgba(183, 255, 60, 0.045),
+      transparent 31rem
+    ),
+    radial-gradient(
+      circle at 8% 85%,
+      rgba(183, 255, 60, 0.018),
+      transparent 25rem
+    ),
+    var(--bg);
+}
+
+.site-shell::before {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  content: "";
+  opacity: 0.17;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.018) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: linear-gradient(to bottom, transparent 4%, black 32%, transparent 92%);
+}
+
+.site-shell::after {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  content: "";
+  pointer-events: none;
+  background: radial-gradient(circle at center, transparent 40%, rgba(0, 0, 0, 0.42) 115%);
+}
+
+.live-dot-pulse::after {
+  position: absolute;
+  inset: -3px;
+  content: "";
+  border: 1px solid var(--lime);
+  border-radius: 999px;
+  opacity: 0;
+  animation: live-dot-pulse 2.6s ease-out infinite;
+}
+
+@keyframes live-dot-pulse {
+  0%,
+  45% {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+
+  55% {
+    opacity: 0.34;
+  }
+
+  82%,
+  100% {
+    opacity: 0;
+    transform: scale(1.45);
+  }
+}
+
+.dons-tape-track {
+  display: flex;
+  width: max-content;
+  animation: dons-tape-scroll 52s linear infinite;
+  will-change: transform;
+}
+
+.dons-tape:hover .dons-tape-track {
+  animation-play-state: paused;
+}
+
+.hero-signal-state {
+  animation: hero-signal-state 8.8s ease-in-out infinite;
+}
+
+.hero-impact-value {
+  animation: hero-impact-value 9.4s ease-in-out infinite;
+}
+
+.hero-paid-value {
+  animation: hero-paid-value 7.8s ease-in-out infinite;
+}
+
+@keyframes hero-signal-state {
+  0%,
+  100% {
+    opacity: 0.58;
+  }
+
+  48% {
+    opacity: 0.92;
+  }
+}
+
+@keyframes hero-impact-value {
+  0%,
+  72%,
+  100% {
+    color: var(--text-secondary);
+  }
+
+  78%,
+  84% {
+    color: var(--text-primary);
+  }
+}
+
+@keyframes hero-paid-value {
+  0%,
+  100% {
+    opacity: 0.72;
+  }
+
+  52% {
+    opacity: 1;
+  }
+}
+
+@keyframes dons-tape-scroll {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.type-hero-word {
+  font-size: clamp(88px, 10vw, 158px);
+}
+
+.type-display {
+  font-family: var(--font-display);
+  font-size: clamp(94px, 10.7vw, 169px);
+  font-synthesis: none;
+  font-weight: 400;
+  line-height: 0.76;
+  letter-spacing: -0.035em;
+}
+
+.type-display-first {
+  margin-top: -0.055em;
+}
+
+.type-hero-word {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  line-height: 0.84;
+  letter-spacing: -0.075em;
+}
+
+.type-heading {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 4vw, 64px);
+  font-synthesis: none;
+  font-weight: 400;
+  line-height: 0.96;
+  letter-spacing: -0.052em;
+}
+
+.type-section-title {
+  font-family: var(--font-display);
+  font-size: clamp(72px, 7vw, 108px);
+  font-synthesis: none;
+  font-weight: 400;
+  line-height: 0.76;
+  letter-spacing: -0.035em;
+  text-transform: uppercase;
+}
+
+.type-body {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.55;
+  letter-spacing: -0.012em;
+}
+
+.type-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.type-tech-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.type-metric {
+  font-family: var(--font-sans);
+  font-size: clamp(36px, 3vw, 52px);
+  font-variant-numeric: tabular-nums;
+  font-weight: 620;
+  line-height: 1;
+  letter-spacing: -0.045em;
+}
+
+.type-mono {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.45;
+  letter-spacing: 0.04em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .dons-tape-track {
+    animation: none;
+    will-change: auto;
+  }
+
+  .dons-tape-group[aria-hidden="true"] {
+    display: none;
+  }
+
+  .hero-signal-state,
+  .hero-impact-value,
+  .hero-paid-value {
+    animation: none !important;
+  }
+}
