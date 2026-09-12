@@ -125,7 +125,7 @@ export function AttentionBecomesValue() {
               value="1863"
               className="mt-2 block text-[24px] font-medium tracking-[-0.035em] tabular-nums text-text-primary"
             >
-              $1,863.00
+              18.63 SOL
             </data>
           </div>
         </motion.div>

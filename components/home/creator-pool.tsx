@@ -3,19 +3,14 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { heroEconomics } from "@/data/mock-data";
+import { formatSol } from "@/lib/currency";
 
-const increments = [0.18, 0.25, 0.26, 0.14, 0.33, 0.09];
+const increments = [0.0018, 0.0025, 0.0026, 0.0014, 0.0033, 0.0009];
 const bars = [28, 34, 31, 42, 38, 47, 43, 52, 48, 58, 54, 63, 59, 68, 65, 74, 70, 80];
-const currency = new Intl.NumberFormat("en-US", {
-  style: "currency",
-  currency: "USD",
-  minimumFractionDigits: 2,
-  maximumFractionDigits: 2,
-});
 
 export function CreatorPool() {
   const reduceMotion = useReducedMotion();
-  const [balance, setBalance] = useState(heroEconomics.creatorPoolUsd);
+  const [balance, setBalance] = useState(heroEconomics.creatorPoolSol);
   const incrementIndex = useRef(0);
 
   useEffect(() => {
@@ -24,13 +19,13 @@ export function CreatorPool() {
     const interval = window.setInterval(() => {
       const amount = increments[incrementIndex.current % increments.length];
       incrementIndex.current += 1;
-      setBalance((current) => Number((current + amount).toFixed(2)));
+      setBalance((current) => Number((current + amount).toFixed(4)));
     }, 4200);
 
     return () => window.clearInterval(interval);
   }, [reduceMotion]);
 
-  const formattedBalance = currency.format(balance);
+  const formattedBalance = formatSol(balance);
 
   return (
     <div className="absolute left-[34%] top-[34%] z-20 w-[310px] rounded-[4px] border border-white/14 bg-bg-elevated/95 p-6 backdrop-blur-[3px]">

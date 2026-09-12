@@ -15,7 +15,7 @@ const trendingCreators = [
   { handle: "@mira_eth", detail: "Impact +18%" },
   { handle: "@julian0x", detail: "Reach +14%" },
   { handle: "@noraonchain", detail: "6 live signals" },
-  { handle: "@0xharvey", detail: "$8.21 estimated" },
+  { handle: "@0xharvey", detail: "0.0821 SOL estimated" },
 ];
 
 function formatCountdown(totalSeconds: number) {
@@ -104,7 +104,7 @@ export function WireSidebar() {
           </div>
           <div className="pl-5">
             <dt className="type-label text-text-muted">Creator Pool</dt>
-            <dd className="mt-3 text-[20px] font-medium tabular-nums text-lime">$1,863.00</dd>
+            <dd className="mt-3 text-[20px] font-medium tabular-nums text-lime">18.63 SOL</dd>
           </div>
         </dl>
       </section>

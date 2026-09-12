@@ -7,21 +7,15 @@ import { LiveDot } from "@/components/ui/live-dot";
 import {
   createLiveSettlement,
   initialSettlements,
-  mockContract,
+  mockProgram,
   nextCutDurationSeconds,
   proofMetrics,
   settlementCadenceMs,
 } from "@/data/proof";
+import { formatSol } from "@/lib/currency";
 
-const currency = new Intl.NumberFormat("en-US", {
-  style: "currency",
-  currency: "USD",
-  minimumFractionDigits: 2,
-  maximumFractionDigits: 2,
-});
-
-const feeIncrements = [0.31, 0.36, 0.24, 0.42];
-const poolIncrements = [0.07, 0.04, 0.09, 0.06];
+const feeIncrements = [0.0031, 0.0036, 0.0024, 0.0042];
+const poolIncrements = [0.0007, 0.0004, 0.0009, 0.0006];
 
 function formatCountdown(totalSeconds: number) {
   const hours = Math.floor(totalSeconds / 3600);
@@ -60,12 +54,12 @@ export function Proof() {
 
     const financeTimer = window.setInterval(() => {
       const increment = feeIncrements[feeIndex % feeIncrements.length];
-      setFeesCaptured((current) => Math.round((current + increment) * 100) / 100);
+      setFeesCaptured((current) => Math.round((current + increment) * 10_000) / 10_000);
       feeIndex += 1;
     }, 8200);
     const poolTimer = window.setInterval(() => {
       const increment = poolIncrements[poolIndex % poolIncrements.length];
-      setCreatorPool((current) => Math.round((current + increment) * 100) / 100);
+      setCreatorPool((current) => Math.round((current + increment) * 10_000) / 10_000);
       poolIndex += 1;
     }, 11300);
 
@@ -86,7 +80,7 @@ export function Proof() {
         const settlement = createLiveSettlement(sequence, formatLocalTime(new Date()));
 
         setSettlements((current) => [settlement, ...current].slice(0, 6));
-        setDistributed((current) => Math.round((current + settlement.amount) * 100) / 100);
+        setDistributed((current) => Math.round((current + settlement.amount) * 10_000) / 10_000);
 
         if (!seenCreators.current.has(settlement.creator)) {
           seenCreators.current.add(settlement.creator);
@@ -124,7 +118,7 @@ export function Proof() {
 
           <div className="col-span-4 flex justify-end pb-1">
             <div className="border-l border-border pl-5">
-              <p className="text-[13px] font-medium text-text-secondary">Robinhood Chain</p>
+              <p className="text-[13px] font-medium text-text-secondary">Solana</p>
               <p className="type-label mt-3 flex items-center gap-2 text-lime">
                 <LiveDot />
                 Live
@@ -139,40 +133,40 @@ export function Proof() {
               <div className="border-b border-r border-border py-8 pr-7">
                 <p className="type-label text-text-muted">Fees Captured</p>
                 <motion.data
-                  key={feesCaptured.toFixed(2)}
+                  key={feesCaptured.toFixed(4)}
                   value={feesCaptured}
                   initial={reduceMotion ? false : { color: "#b7ff3c" }}
                   animate={{ color: "#f1f2ea" }}
                   transition={{ duration: 0.8 }}
                   className="mt-5 block text-[45px] font-medium leading-none tracking-[-0.05em] tabular-nums"
                 >
-                  {currency.format(feesCaptured)}
+                  {formatSol(feesCaptured)}
                 </motion.data>
               </div>
               <div className="border-b border-border py-8 pl-7">
                 <p className="type-label text-text-muted">Creator Pool</p>
                 <motion.data
-                  key={creatorPool.toFixed(2)}
+                  key={creatorPool.toFixed(4)}
                   value={creatorPool}
                   initial={reduceMotion ? false : { opacity: 0.72 }}
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.7 }}
                   className="mt-5 block text-[45px] font-medium leading-none tracking-[-0.05em] tabular-nums text-lime"
                 >
-                  {currency.format(creatorPool)}
+                  {formatSol(creatorPool)}
                 </motion.data>
               </div>
               <div className="border-r border-border py-7 pr-7">
                 <p className="type-label text-text-muted">Distributed</p>
                 <motion.data
-                  key={distributed.toFixed(2)}
+                  key={distributed.toFixed(4)}
                   value={distributed}
                   initial={reduceMotion ? false : { color: "#b7ff3c" }}
                   animate={{ color: "#f1f2ea" }}
                   transition={{ duration: 0.65 }}
                   className="mt-4 block text-[29px] font-medium tracking-[-0.04em] tabular-nums text-text-primary"
                 >
-                  {currency.format(distributed)}
+                  {formatSol(distributed)}
                 </motion.data>
               </div>
               <div className="grid grid-cols-2 gap-4 py-7 pl-7">
@@ -232,7 +226,7 @@ export function Proof() {
             <dl className="grid grid-cols-2 gap-x-8 gap-y-7 py-9">
               <div>
                 <dt className="type-label text-text-muted">Network</dt>
-                <dd className="mt-3 text-[13px] text-text-secondary">Robinhood Chain</dd>
+                <dd className="mt-3 text-[13px] text-text-secondary">Solana</dd>
               </div>
               <div>
                 <dt className="type-label text-text-muted">Pool Status</dt>
@@ -252,17 +246,17 @@ export function Proof() {
 
             <div className="flex items-center justify-between border-t border-border pt-6">
               <div>
-                <p className="type-label text-text-muted">Creator Pool Contract</p>
+                <p className="type-label text-text-muted">Creator Pool Program</p>
                 <p className="mt-3 font-mono text-[10px] text-text-secondary">
-                  {mockContract} <span className="text-text-muted">· prototype address</span>
+                  {mockProgram} <span className="text-text-muted">· prototype address</span>
                 </p>
               </div>
               <a
                 href="#proof"
-                title="Prototype contract link"
+                title="Prototype program link"
                 className="text-[11px] font-medium text-text-secondary transition-colors hover:text-text-primary focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-lime"
               >
-                View contract <span aria-hidden="true">↗</span>
+                View program <span aria-hidden="true">↗</span>
               </a>
             </div>
           </div>
@@ -271,7 +265,7 @@ export function Proof() {
             <div className="flex items-center justify-between border-b border-border px-6 py-6">
               <div>
                 <p className="type-label text-text-secondary">Live Settlements</p>
-                <p className="mt-2 text-[11px] text-text-muted">Cut #0042 · Robinhood Chain</p>
+                <p className="mt-2 text-[11px] text-text-muted">Cut #0042 · Solana</p>
               </div>
               <p className="type-label flex items-center gap-2 text-lime">
                 <LiveDot /> Settling live
@@ -305,7 +299,7 @@ export function Proof() {
                       {settlement.creator}
                     </span>
                     <span className="text-[19px] font-medium tracking-[-0.03em] tabular-nums text-text-primary">
-                      {currency.format(settlement.amount)}
+                      {formatSol(settlement.amount)}
                     </span>
                     <span className="font-mono text-[9px] text-text-muted">
                       CUT {settlement.cut}

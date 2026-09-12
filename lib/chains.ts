@@ -1,22 +1,11 @@
-import { defineChain } from "viem";
-
-export const robinhoodChain = defineChain({
-  id: 4663,
-  name: "Robinhood Chain",
+export const solanaMainnet = {
+  name: "Solana",
+  cluster: "mainnet-beta",
   nativeCurrency: {
-    name: "Ether",
-    symbol: "ETH",
-    decimals: 18,
+    name: "Solana",
+    symbol: "SOL",
+    decimals: 9,
   },
-  rpcUrls: {
-    default: {
-      http: ["https://rpc.mainnet.chain.robinhood.com"],
-    },
-  },
-  blockExplorers: {
-    default: {
-      name: "Blockscout",
-      url: "https://robinhoodchain.blockscout.com",
-    },
-  },
-});
+  rpcUrl: "https://api.mainnet-beta.solana.com",
+  explorerUrl: "https://explorer.solana.com",
+} as const;

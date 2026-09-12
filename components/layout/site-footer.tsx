@@ -15,7 +15,7 @@ const primaryLinks = [
 const resourceLinks = [
   { label: "X", href: DONS_X_URL },
   { label: "Docs", href: "#" },
-  { label: "Robinhood Chain", href: "/proof" },
+  { label: "Solana", href: "/proof" },
 ];
 
 const footerLinkClass =
@@ -65,18 +65,6 @@ export function SiteFooter() {
               </ul>
             </nav>
 
-            <span className="flex h-8 items-center gap-2.5 rounded-full border border-[#2b5535] bg-[#102317] py-1 pl-1.5 pr-3 text-[11px] font-medium text-[#82b777]">
-              <span className="size-5 shrink-0 overflow-hidden rounded-full ring-1 ring-[#426f48]/45">
-                <Image
-                  src="/assets/brand/robinhood-feather.jpg"
-                  alt=""
-                  width={20}
-                  height={20}
-                  className="size-5"
-                />
-              </span>
-              Built on Robinhood Chain
-            </span>
           </div>
         </div>
 

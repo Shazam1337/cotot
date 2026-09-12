@@ -95,7 +95,7 @@ export function WirePage() {
                     impact: signal.impact + 7,
                     impressions: signal.impressions + 380,
                     engagements: signal.engagements + 17,
-                    estimatedCut: Math.round((signal.estimatedCut + 0.08) * 100) / 100,
+                    estimatedCut: Math.round((signal.estimatedCut + 0.0008) * 10_000) / 10_000,
                   }
                 : signal,
             );
@@ -117,7 +117,7 @@ export function WirePage() {
                   ...signal,
                   status: "scored",
                   impact: signal.impact + 4,
-                  estimatedCut: Math.round((signal.estimatedCut + 0.05) * 100) / 100,
+                  estimatedCut: Math.round((signal.estimatedCut + 0.0005) * 10_000) / 10_000,
                 }
               : signal,
           );

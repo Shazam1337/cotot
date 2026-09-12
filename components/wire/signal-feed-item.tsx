@@ -4,6 +4,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { LiveDot } from "@/components/ui/live-dot";
 import type { WireCreator, WireSignal } from "@/data/wire";
 import { wireStatusLabels } from "@/data/wire";
+import { formatSol } from "@/lib/currency";
 
 const compactNumber = new Intl.NumberFormat("en-US", {
   notation: "compact",
@@ -114,7 +115,7 @@ export function SignalFeedItem({
         </div>
         <div className="border-l border-border pl-5">
           <dd className="text-[21px] font-medium tabular-nums text-lime">
-            ${signal.estimatedCut.toFixed(2)}
+            {formatSol(signal.estimatedCut)}
           </dd>
           <dt className="mt-2 text-[10px] text-text-muted">Estimated cut</dt>
         </div>

@@ -2,27 +2,22 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
-import { Check, Copy, LogOut, RefreshCw } from "lucide-react";
-import type { Address } from "viem";
-import { useDisconnect, useSwitchChain } from "wagmi";
+import { Check, Copy, LogOut } from "lucide-react";
 import { LiveDot } from "@/components/ui/live-dot";
-import { robinhoodChain } from "@/lib/chains";
-import { getWalletErrorMessage, shortenAddress } from "@/lib/wallet";
+import { useWallet } from "@/components/wallet/wallet-provider";
+import { shortenAddress } from "@/lib/wallet";
 
 type WalletMenuProps = {
-  address: Address;
-  chainId: number | undefined;
+  address: string;
   onClose: () => void;
 };
 
-export function WalletMenu({ address, chainId, onClose }: WalletMenuProps) {
+export function WalletMenu({ address, onClose }: WalletMenuProps) {
   const reduceMotion = useReducedMotion();
-  const { disconnect } = useDisconnect();
-  const { isPending, switchChainAsync } = useSwitchChain();
+  const { disconnect } = useWallet();
   const [copied, setCopied] = useState(false);
   const [feedback, setFeedback] = useState<string | null>(null);
   const copiedTimer = useRef<number | undefined>(undefined);
-  const correctNetwork = chainId === robinhoodChain.id;
 
   useEffect(
     () => () => {
@@ -43,17 +38,8 @@ export function WalletMenu({ address, chainId, onClose }: WalletMenuProps) {
     }
   };
 
-  const switchNetwork = async () => {
-    setFeedback(null);
-    try {
-      await switchChainAsync({ chainId: robinhoodChain.id });
-    } catch (error) {
-      setFeedback(getWalletErrorMessage(error, "switch"));
-    }
-  };
-
-  const disconnectWallet = () => {
-    disconnect();
+  const disconnectWallet = async () => {
+    await disconnect();
     onClose();
   };
 
@@ -76,29 +62,12 @@ export function WalletMenu({ address, chainId, onClose }: WalletMenuProps) {
 
       <div className="border-b border-border px-5 py-4">
         <p className="type-label text-text-muted">Network</p>
-        {correctNetwork ? (
-          <div className="mt-3 flex items-center justify-between">
-            <span className="text-[13px] font-medium text-text-primary">Robinhood Chain</span>
-            <span className="type-label flex items-center gap-2 text-lime">
-              <LiveDot /> Connected
-            </span>
-          </div>
-        ) : (
-          <div className="mt-3">
-            <p className="text-[12px] font-semibold uppercase tracking-[0.08em] text-[#b6a77a]">
-              Wrong Network
-            </p>
-            <button
-              type="button"
-              disabled={isPending}
-              onClick={switchNetwork}
-              className="mt-4 flex h-9 w-full cursor-pointer items-center justify-center gap-2 border border-[#385629] bg-[#102317] text-[11px] font-semibold text-[#8dbf7d] transition-colors duration-200 hover:border-[#4a7140] hover:text-[#a6da95] disabled:cursor-wait disabled:opacity-60"
-            >
-              <RefreshCw aria-hidden="true" className={`size-3 ${isPending ? "animate-spin" : ""}`} />
-              {isPending ? "Switching network" : "Switch to Robinhood Chain"}
-            </button>
-          </div>
-        )}
+        <div className="mt-3 flex items-center justify-between">
+          <span className="text-[13px] font-medium text-text-primary">Solana Mainnet</span>
+          <span className="type-label flex items-center gap-2 text-lime">
+            <LiveDot /> Connected
+          </span>
+        </div>
       </div>
 
       <div className="grid grid-cols-2">
@@ -116,7 +85,7 @@ export function WalletMenu({ address, chainId, onClose }: WalletMenuProps) {
         </button>
         <button
           type="button"
-          onClick={disconnectWallet}
+          onClick={() => void disconnectWallet()}
           className="flex h-12 cursor-pointer items-center justify-center gap-2 text-[11px] font-medium text-text-secondary transition-colors duration-200 hover:bg-white/[0.025] hover:text-text-primary focus-visible:outline-1 focus-visible:outline-inset focus-visible:outline-lime"
         >
           <LogOut aria-hidden="true" className="size-3" />

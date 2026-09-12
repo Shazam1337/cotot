@@ -1,27 +1,21 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Wallet, X } from "lucide-react";
-import { useConnect, useConnectors } from "wagmi";
+import { useWallet } from "@/components/wallet/wallet-provider";
 import { getWalletErrorMessage } from "@/lib/wallet";
-
-const walletLabels: Record<string, string> = {
-  browserWallet: "Browser Wallet",
-};
 
 export function WalletModal({ open, onClose }: { open: boolean; onClose: () => void }) {
   const reduceMotion = useReducedMotion();
-  const connectors = useConnectors();
-  const { connectAsync, isPending, variables, reset } = useConnect();
-  const [availability, setAvailability] = useState<Record<string, boolean>>({});
+  const { wallets, detectionComplete, connectingWalletId, connect } = useWallet();
+  const isPending = connectingWalletId !== null;
   const [feedback, setFeedback] = useState<string | null>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     if (!open) return;
 
-    let cancelled = false;
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     closeButtonRef.current?.focus();
@@ -31,55 +25,27 @@ export function WalletModal({ open, onClose }: { open: boolean; onClose: () => v
     };
     document.addEventListener("keydown", handleKeyDown);
 
-    Promise.all(
-      connectors.map(async (connector) => {
-        try {
-          return [connector.uid, Boolean(await connector.getProvider())] as const;
-        } catch {
-          return [connector.uid, false] as const;
-        }
-      }),
-    ).then((entries) => {
-      if (!cancelled) setAvailability(Object.fromEntries(entries));
-    });
-
     return () => {
-      cancelled = true;
       document.body.style.overflow = previousOverflow;
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, [connectors, isPending, onClose, open]);
-
-  const hasDetectedWallet = useMemo(
-    () => connectors.some((connector) => availability[connector.uid]),
-    [availability, connectors],
-  );
-  const detectionComplete = connectors.every(
-    (connector) => availability[connector.uid] !== undefined,
-  );
-  const availableConnectors = useMemo(() => {
-    const detected = connectors.filter((connector) => availability[connector.uid]);
-    const discovered = detected.filter((connector) => connector.id !== "browserWallet");
-    return discovered.length > 0 ? discovered : detected;
-  }, [availability, connectors]);
+  }, [isPending, onClose, open]);
 
   const closeModal = () => {
     if (isPending) return;
-    reset();
     setFeedback(null);
     onClose();
   };
 
-  const connectWallet = async (connector: (typeof connectors)[number]) => {
+  const connectWallet = async (wallet: (typeof wallets)[number]) => {
     setFeedback(null);
-    reset();
 
     try {
-      await connectAsync({ connector });
+      await connect(wallet);
       setFeedback(null);
       onClose();
     } catch (error) {
-      setFeedback(getWalletErrorMessage(error, "connect"));
+      setFeedback(getWalletErrorMessage(error));
     }
   };
 
@@ -121,7 +87,7 @@ export function WalletModal({ open, onClose }: { open: boolean; onClose: () => v
                   Connect to DONS
                 </h2>
                 <p className="mt-2 text-[13px] leading-5 text-text-secondary">
-                  Connect an EVM wallet to enter the network.
+                  Connect a Solana wallet to enter the network.
                 </p>
               </div>
               <button
@@ -144,16 +110,15 @@ export function WalletModal({ open, onClose }: { open: boolean; onClose: () => v
                     <span className="type-label text-text-muted">Checking</span>
                   </div>
                 ) : null}
-                {availableConnectors.map((connector) => {
-                  const available = availability[connector.uid];
-                  const pending = isPending && variables?.connector === connector;
+                {wallets.map((wallet) => {
+                  const pending = connectingWalletId === wallet.id;
 
                   return (
                     <button
-                      key={connector.uid}
+                      key={wallet.id}
                       type="button"
                       disabled={isPending}
-                      onClick={() => connectWallet(connector)}
+                      onClick={() => connectWallet(wallet)}
                       className="group flex h-[58px] w-full items-center justify-between border-b border-border px-1 text-left transition-colors duration-200 last:border-b-0 enabled:cursor-pointer enabled:hover:bg-white/[0.025] disabled:cursor-not-allowed"
                     >
                       <span className="flex items-center gap-3.5">
@@ -161,32 +126,24 @@ export function WalletModal({ open, onClose }: { open: boolean; onClose: () => v
                           <Wallet aria-hidden="true" className="size-3.5" strokeWidth={1.6} />
                         </span>
                         <span className="text-[14px] font-medium text-text-primary">
-                          {walletLabels[connector.id] ?? connector.name}
+                          {wallet.name}
                         </span>
                       </span>
-                      <span
-                        className={`text-[9px] font-semibold uppercase tracking-[0.1em] ${
-                          available ? "text-lime" : "text-text-muted"
-                        }`}
-                      >
-                        {pending
-                          ? "Connecting"
-                          : available
-                            ? "Available"
-                            : "Unavailable"}
+                      <span className="text-[9px] font-semibold uppercase tracking-[0.1em] text-lime">
+                        {pending ? "Connecting" : "Available"}
                       </span>
                     </button>
                   );
                 })}
               </div>
 
-              {detectionComplete && !hasDetectedWallet ? (
+              {detectionComplete && wallets.length === 0 ? (
                 <div className="mt-5 border-l border-[#385629] pl-4">
                   <p className="text-[12px] font-medium text-text-primary">
-                    No EVM wallet detected.
+                    No Solana wallet detected.
                   </p>
                   <p className="mt-1.5 text-[11px] text-text-muted">
-                    Install MetaMask or Rabby to continue.
+                    Install Phantom, Solflare, or Backpack to continue.
                   </p>
                 </div>
               ) : null}
@@ -199,7 +156,7 @@ export function WalletModal({ open, onClose }: { open: boolean; onClose: () => v
             </div>
 
             <div className="flex items-center justify-between border-t border-border px-7 py-4 font-mono text-[8px] uppercase tracking-[0.1em] text-text-muted">
-              <span>EIP-1193</span>
+              <span>Solana Mainnet</span>
               <span>Connection only · no signing</span>
             </div>
           </motion.div>

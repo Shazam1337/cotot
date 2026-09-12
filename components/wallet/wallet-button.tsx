@@ -3,15 +3,14 @@
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ChevronDown, Wallet } from "lucide-react";
-import { useAccount } from "wagmi";
 import { LiveDot } from "@/components/ui/live-dot";
 import { shortenAddress } from "@/lib/wallet";
 import { WalletMenu } from "@/components/wallet/wallet-menu";
-import { useWalletModal } from "@/components/wallet/wallet-provider";
+import { useWallet, useWalletModal } from "@/components/wallet/wallet-provider";
 
 export function WalletButton() {
   const reduceMotion = useReducedMotion();
-  const { address, chainId, isConnected, isReconnecting } = useAccount();
+  const { address, isConnected, isReconnecting } = useWallet();
   const [menuOpen, setMenuOpen] = useState(false);
   const { openWalletModal } = useWalletModal();
   const rootRef = useRef<HTMLDivElement>(null);
@@ -78,7 +77,7 @@ export function WalletButton() {
 
       <AnimatePresence>
         {menuOpen && isConnected && address ? (
-          <WalletMenu address={address} chainId={chainId} onClose={() => setMenuOpen(false)} />
+          <WalletMenu address={address} onClose={() => setMenuOpen(false)} />
         ) : null}
       </AnimatePresence>
     </div>

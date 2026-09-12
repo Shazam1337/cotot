@@ -7,6 +7,7 @@ import {
   type DemoSignal,
 } from "@/data/demo-scenario";
 import { DONS_X_URL } from "@/lib/constants";
+import { formatSol } from "@/lib/currency";
 
 type FeaturedSignalProps = {
   creator: DemoCreator;
@@ -95,7 +96,7 @@ export function FeaturedSignal({
           </div>
 
           <p className="text-[10px] font-medium uppercase tracking-[0.14em] text-text-muted">
-            DONS / <span className="text-lime">Robinhood Chain</span>
+            DONS / <span className="text-lime">Solana</span>
           </p>
         </motion.div>
       </div>
@@ -150,14 +151,14 @@ export function FeaturedSignal({
         <div className="border-l border-border pl-8">
           <p className="type-label text-text-muted">Estimated Cut</p>
           <motion.data
-            key={estimatedCut.toFixed(2)}
+            key={estimatedCut.toFixed(4)}
             value={estimatedCut}
             initial={reduceMotion ? false : { opacity: 0.65, y: 2 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             className="mt-3 block text-[42px] font-medium leading-none tracking-[-0.045em] tabular-nums text-lime"
           >
-            ${estimatedCut.toFixed(2)}
+            {formatSol(estimatedCut)}
           </motion.data>
           <p className="mt-3 max-w-[190px] text-[11px] leading-relaxed text-text-muted">
             Updates while this signal is tracking.

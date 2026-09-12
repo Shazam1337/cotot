@@ -7,6 +7,7 @@ import {
   type DemoCreator,
   type DemoSignal,
 } from "@/data/demo-scenario";
+import { formatSol } from "@/lib/currency";
 
 type LiveSignalQueueProps = {
   creators: Map<string, DemoCreator>;
@@ -14,7 +15,7 @@ type LiveSignalQueueProps = {
 };
 
 function getPrimaryValue(signal: DemoSignal) {
-  if (signal.status === "paid") return `$${signal.estimatedCut.toFixed(2)}`;
+  if (signal.status === "paid") return formatSol(signal.estimatedCut);
   if (signal.status === "detected") return "Listening";
   return `${signal.impact} Impact`;
 }
@@ -86,7 +87,7 @@ export function LiveSignalQueue({ creators, signals }: LiveSignalQueueProps) {
                 </p>
                 {signal.status !== "detected" && signal.status !== "paid" ? (
                   <p className="text-[10px] tabular-nums text-text-muted">
-                    Est. cut ${signal.estimatedCut.toFixed(2)}
+                    Est. cut {formatSol(signal.estimatedCut)}
                   </p>
                 ) : null}
               </div>

@@ -74,21 +74,21 @@ export const creatorById = Object.fromEntries(
 export const creatorHandles = creators.map((creator) => creator.handle) as readonly `@${string}`[];
 
 const seasonMetrics: Record<string, CreatorMetrics> = {
-  mira: { donScore: 941, signals: 42, reach: 2_800_000, avgImpact: 814, earned: 48.21, momentum: 12.8, liveSignals: 3 },
-  julian: { donScore: 904, signals: 39, reach: 2_300_000, avgImpact: 792, earned: 39.84, momentum: 9.4, liveSignals: 2 },
-  nora: { donScore: 881, signals: 34, reach: 1_900_000, avgImpact: 781, earned: 31.42, momentum: 7.8, liveSignals: 2 },
-  kira: { donScore: 842, signals: 31, reach: 1_600_000, avgImpact: 782, earned: 24.82, momentum: 8.4, liveSignals: 2 },
-  alex: { donScore: 824, signals: 28, reach: 1_400_000, avgImpact: 764, earned: 21.42, momentum: 4.8, liveSignals: 2 },
-  zoe: { donScore: 811, signals: 27, reach: 1_720_000, avgImpact: 751, earned: 19.84, momentum: 7.1, liveSignals: 2 },
-  fox: { donScore: 798, signals: 24, reach: 1_100_000, avgImpact: 744, earned: 17.2, momentum: 12.4, liveSignals: 3 },
-  harvey: { donScore: 781, signals: 33, reach: 980_000, avgImpact: 721, earned: 15.68, momentum: 14.1, liveSignals: 3 },
-  kate: { donScore: 768, signals: 21, reach: 921_000, avgImpact: 718, earned: 25.06, momentum: 16.8, liveSignals: 3 },
-  benji: { donScore: 752, signals: 20, reach: 874_000, avgImpact: 701, earned: 12.94, momentum: 3.9, liveSignals: 1 },
-  stella: { donScore: 741, signals: 18, reach: 812_000, avgImpact: 694, earned: 11.82, momentum: 5.7, liveSignals: 1 },
-  jules: { donScore: 729, signals: 17, reach: 768_000, avgImpact: 687, earned: 10.41, momentum: 2.8, liveSignals: 1 },
-  noah: { donScore: 718, signals: 16, reach: 721_000, avgImpact: 675, earned: 9.84, momentum: 6.2, liveSignals: 2 },
-  nori: { donScore: 704, signals: 15, reach: 682_000, avgImpact: 661, earned: 8.92, momentum: 1.8, liveSignals: 1 },
-  mia: { donScore: 692, signals: 14, reach: 641_000, avgImpact: 652, earned: 8.21, momentum: 4.1, liveSignals: 1 },
+  mira: { donScore: 941, signals: 42, reach: 2_800_000, avgImpact: 814, earned: 0.4821, momentum: 12.8, liveSignals: 3 },
+  julian: { donScore: 904, signals: 39, reach: 2_300_000, avgImpact: 792, earned: 0.3984, momentum: 9.4, liveSignals: 2 },
+  nora: { donScore: 881, signals: 34, reach: 1_900_000, avgImpact: 781, earned: 0.3142, momentum: 7.8, liveSignals: 2 },
+  kira: { donScore: 842, signals: 31, reach: 1_600_000, avgImpact: 782, earned: 0.2482, momentum: 8.4, liveSignals: 2 },
+  alex: { donScore: 824, signals: 28, reach: 1_400_000, avgImpact: 764, earned: 0.2142, momentum: 4.8, liveSignals: 2 },
+  zoe: { donScore: 811, signals: 27, reach: 1_720_000, avgImpact: 751, earned: 0.1984, momentum: 7.1, liveSignals: 2 },
+  fox: { donScore: 798, signals: 24, reach: 1_100_000, avgImpact: 744, earned: 0.172, momentum: 12.4, liveSignals: 3 },
+  harvey: { donScore: 781, signals: 33, reach: 980_000, avgImpact: 721, earned: 0.1568, momentum: 14.1, liveSignals: 3 },
+  kate: { donScore: 768, signals: 21, reach: 921_000, avgImpact: 718, earned: 0.2506, momentum: 16.8, liveSignals: 3 },
+  benji: { donScore: 752, signals: 20, reach: 874_000, avgImpact: 701, earned: 0.1294, momentum: 3.9, liveSignals: 1 },
+  stella: { donScore: 741, signals: 18, reach: 812_000, avgImpact: 694, earned: 0.1182, momentum: 5.7, liveSignals: 1 },
+  jules: { donScore: 729, signals: 17, reach: 768_000, avgImpact: 687, earned: 0.1041, momentum: 2.8, liveSignals: 1 },
+  noah: { donScore: 718, signals: 16, reach: 721_000, avgImpact: 675, earned: 0.0984, momentum: 6.2, liveSignals: 2 },
+  nori: { donScore: 704, signals: 15, reach: 682_000, avgImpact: 661, earned: 0.0892, momentum: 1.8, liveSignals: 1 },
+  mia: { donScore: 692, signals: 14, reach: 641_000, avgImpact: 652, earned: 0.0821, momentum: 4.1, liveSignals: 1 },
 };
 
 export const rankedCreatorIds = Object.keys(seasonMetrics);
@@ -120,7 +120,7 @@ function createRangeSnapshot(range: CreatorRange): CreatorRangeSnapshot[] {
         signals: Math.max(1, Math.round(base.signals * profile.signals)),
         reach: Math.round((base.reach * profile.reach) / 1000) * 1000,
         avgImpact: base.avgImpact + profile.impactDelta,
-        earned: Math.round(base.earned * profile.earned * 100) / 100,
+        earned: Math.round(base.earned * profile.earned * 10_000) / 10_000,
         momentum: Math.round(base.momentum * profile.momentum * 10) / 10,
         liveSignals: Math.max(1, Math.round(base.liveSignals * profile.liveSignals)),
       },
@@ -146,7 +146,7 @@ export const risingCreators = [
   { creatorId: "kate", movement: 14, detail: "+22% reach", activity: "3 live signals" },
   { creatorId: "harvey", movement: 9, detail: "+18% Impact", activity: "Network velocity" },
   { creatorId: "fox", movement: 7, detail: "Avg Impact 812", activity: "3 live signals" },
-  { creatorId: "lucas", movement: 6, detail: "$6.82 earned", activity: "This week" },
+  { creatorId: "lucas", movement: 6, detail: "0.0682 SOL earned", activity: "This week" },
 ] as const;
 
 export const creatorLiveCadenceMs = [14_000, 17_000, 13_000, 19_000] as const;

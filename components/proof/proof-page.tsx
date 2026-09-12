@@ -19,20 +19,14 @@ import {
   proofPoolIncrements,
   proofSettlementCadenceMs,
   proofValueFlow,
-  protocolContracts,
+  protocolPrograms,
   systemStatuses,
   type ProtocolActivity,
 } from "@/data/proof";
-import { robinhoodChain } from "@/lib/chains";
+import { solanaMainnet } from "@/lib/chains";
+import { formatSol } from "@/lib/currency";
 
 type HighlightedMetric = "fees" | "pool" | "distributed" | "creators" | null;
-
-const currency = new Intl.NumberFormat("en-US", {
-  style: "currency",
-  currency: "USD",
-  minimumFractionDigits: 2,
-  maximumFractionDigits: 2,
-});
 
 function formatCountdown(totalSeconds: number) {
   const hours = Math.floor(totalSeconds / 3600);
@@ -108,11 +102,11 @@ export function ProofPage() {
 
         if (updateFees) {
           const increment = proofFeeIncrements[incrementIndex % proofFeeIncrements.length];
-          setFeesCaptured((current) => Math.round((current + increment) * 100) / 100);
+          setFeesCaptured((current) => Math.round((current + increment) * 10_000) / 10_000);
           highlight("fees");
         } else {
           const increment = proofPoolIncrements[incrementIndex % proofPoolIncrements.length];
-          setCreatorPool((current) => Math.round((current + increment) * 100) / 100);
+          setCreatorPool((current) => Math.round((current + increment) * 10_000) / 10_000);
           highlight("pool");
           setActivity((current) => [
             {
@@ -120,7 +114,7 @@ export function ProofPage() {
               timestamp: formatLocalTime(new Date()),
               event: "Creator Pool",
               detail: "Fee allocation received",
-              amount: `+$${increment.toFixed(2)}`,
+              amount: `+${formatSol(increment)}`,
             },
             ...current,
           ].slice(0, 6));
@@ -148,7 +142,7 @@ export function ProofPage() {
         const isNewCreator = !seenCreators.current.has(settlement.creator);
 
         setSettlements((current) => [settlement, ...current].slice(0, 8));
-        setDistributed((current) => Math.round((current + settlement.amount) * 100) / 100);
+        setDistributed((current) => Math.round((current + settlement.amount) * 10_000) / 10_000);
         highlight("distributed");
         if (isNewCreator) {
           seenCreators.current.add(settlement.creator);
@@ -160,7 +154,7 @@ export function ProofPage() {
             timestamp,
             event: `Settlement ${settlement.settlementId} completed`,
             detail: settlement.creator,
-            amount: currency.format(settlement.amount),
+            amount: formatSol(settlement.amount),
           },
           ...current,
         ].slice(0, 6));
@@ -203,7 +197,7 @@ export function ProofPage() {
           <div className="col-span-4 flex justify-end pb-1">
             <dl className="min-w-[210px] border-l border-border pl-5">
               <div>
-                <dt className="type-label text-text-muted">Robinhood Chain</dt>
+                <dt className="type-label text-text-muted">Solana</dt>
                 <dd className="type-label mt-3 flex items-center gap-2 text-lime"><LiveDot /> Live</dd>
               </div>
               <div className="mt-5">
@@ -220,21 +214,21 @@ export function ProofPage() {
             <div className="min-h-[190px] border-r border-border px-8 py-8">
               <p className="type-label text-text-muted">Fees Captured</p>
               <data value={feesCaptured} className="mt-6 block text-[58px] font-medium leading-none tracking-[-0.055em] tabular-nums text-text-primary">
-                <MetricValue active={highlightedMetric === "fees"}>{currency.format(feesCaptured)}</MetricValue>
+                <MetricValue active={highlightedMetric === "fees"}>{formatSol(feesCaptured)}</MetricValue>
               </data>
               <p className="mt-5 text-[10px] text-text-muted">Protocol trading activity</p>
             </div>
             <div className="min-h-[190px] border-r border-border px-8 py-8">
               <p className="type-label text-text-muted">Creator Pool</p>
               <data value={creatorPool} className="mt-6 block text-[58px] font-medium leading-none tracking-[-0.055em] tabular-nums text-lime">
-                <MetricValue active={highlightedMetric === "pool"}>{currency.format(creatorPool)}</MetricValue>
+                <MetricValue active={highlightedMetric === "pool"}>{formatSol(creatorPool)}</MetricValue>
               </data>
               <p className="mt-5 text-[10px] text-text-muted">22% creator allocation</p>
             </div>
             <div className="min-h-[190px] px-8 py-8">
               <p className="type-label text-text-muted">Distributed</p>
               <data value={distributed} className="mt-6 block text-[42px] font-medium leading-none tracking-[-0.05em] tabular-nums text-text-primary">
-                <MetricValue active={highlightedMetric === "distributed"}>{currency.format(distributed)}</MetricValue>
+                <MetricValue active={highlightedMetric === "distributed"}>{formatSol(distributed)}</MetricValue>
               </data>
               <p className="mt-6 type-label flex items-center gap-2 text-lime"><LiveDot /> Settlements live</p>
             </div>
@@ -259,9 +253,9 @@ export function ProofPage() {
           <div className="mt-7 grid grid-cols-[1.3fr_0.7fr] gap-12">
             <dl className="grid grid-cols-4 border-y border-border py-6">
               {[
-                ["Trade Volume", currency.format(proofValueFlow.tradeVolume)],
-                ["Fees Generated", currency.format(proofValueFlow.feesGenerated)],
-                ["Creator Allocation", currency.format(proofValueFlow.creatorAllocation)],
+                ["Trade Volume", formatSol(proofValueFlow.tradeVolume)],
+                ["Fees Generated", formatSol(proofValueFlow.feesGenerated)],
+                ["Creator Allocation", formatSol(proofValueFlow.creatorAllocation)],
                 ["Current Cut", proofValueFlow.currentCut],
               ].map(([label, value], index) => <div key={label} className={index ? "border-l border-border pl-6" : ""}><dd className={`${label === "Current Cut" ? "font-mono" : ""} text-[20px] font-medium tabular-nums text-text-primary`}>{value}</dd><dt className="mt-3 text-[9px] uppercase tracking-[0.09em] text-text-muted">{label}</dt></div>)}
             </dl>
@@ -277,7 +271,7 @@ export function ProofPage() {
               ["Status", currentProofCut.status],
               ["Started", currentProofCut.started, true],
               ["Next Distribution", formatCountdown(secondsRemaining), true],
-              ["Creator Pool", currency.format(creatorPool)],
+              ["Creator Pool", formatSol(creatorPool)],
               ["Eligible Signals", currentProofCut.eligibleSignals.toString()],
               ["Eligible Creators", currentProofCut.eligibleCreators.toString()],
             ].map(([label, value, mono], index) => <div key={label as string} className={index ? "px-5" : "pr-5"}><dt className="type-label text-text-muted">{label}</dt><dd className={`${mono ? "font-mono" : ""} mt-3 text-[14px] font-medium tabular-nums text-text-primary`}>{value}</dd></div>)}
@@ -293,7 +287,7 @@ export function ProofPage() {
             <div className="grid grid-cols-[1.35fr_0.8fr_0.7fr_0.9fr_1.2fr_0.85fr_0.8fr] gap-5 border-b border-border px-6 py-4 text-[9px] font-semibold uppercase tracking-[0.11em] text-text-muted"><span>Creator</span><span>Amount</span><span>Cut</span><span>Settlement ID</span><span>Mock Hash</span><span>Time</span><span>Status</span></div>
             <ol aria-live="polite">
               {settlements.map((settlement) => (
-                <motion.li key={settlement.id} initial={reduceMotion ? false : { opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: reduceMotion ? 0 : 0.3, ease: [0.22, 1, 0.36, 1] }} className="grid min-h-[66px] grid-cols-[1.35fr_0.8fr_0.7fr_0.9fr_1.2fr_0.85fr_0.8fr] items-center gap-5 border-b border-border px-6 last:border-b-0"><span className="text-[13px] font-semibold text-text-primary">{settlement.creator}</span><span className="text-[14px] font-medium tabular-nums text-lime">{currency.format(settlement.amount)}</span><span className="font-mono text-[10px] text-text-muted">{settlement.cut}</span><span className="font-mono text-[10px] text-text-primary">{settlement.settlementId}</span><span title="Mock transaction hash · local record" className="font-mono text-[9px] text-text-muted">{settlement.mockHash}</span><time className="font-mono text-[9px] text-text-muted">{settlement.timestamp}</time><span className="text-[9px] font-semibold uppercase tracking-[0.1em] text-lime">{settlement.status}</span></motion.li>
+                <motion.li key={settlement.id} initial={reduceMotion ? false : { opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: reduceMotion ? 0 : 0.3, ease: [0.22, 1, 0.36, 1] }} className="grid min-h-[66px] grid-cols-[1.35fr_0.8fr_0.7fr_0.9fr_1.2fr_0.85fr_0.8fr] items-center gap-5 border-b border-border px-6 last:border-b-0"><span className="text-[13px] font-semibold text-text-primary">{settlement.creator}</span><span className="text-[14px] font-medium tabular-nums text-lime">{formatSol(settlement.amount)}</span><span className="font-mono text-[10px] text-text-muted">{settlement.cut}</span><span className="font-mono text-[10px] text-text-primary">{settlement.settlementId}</span><span title="Mock transaction signature · local record" className="font-mono text-[9px] text-text-muted">{settlement.mockHash}</span><time className="font-mono text-[9px] text-text-muted">{settlement.timestamp}</time><span className="text-[9px] font-semibold uppercase tracking-[0.1em] text-lime">{settlement.status}</span></motion.li>
               ))}
             </ol>
           </div>
@@ -303,13 +297,13 @@ export function ProofPage() {
         <section className="mt-24" aria-labelledby="cut-history-heading">
           <div className="mb-8 flex items-end justify-between"><div><p className="type-label text-text-muted">Completed distributions</p><h2 id="cut-history-heading" className="mt-4 text-[32px] font-semibold tracking-[-0.04em]">Cut History</h2></div><p className="font-mono text-[9px] uppercase tracking-[0.1em] text-text-muted">8 previous Cuts</p></div>
           <div className="grid grid-cols-[0.8fr_1fr_1fr_1fr_0.8fr_0.8fr_0.8fr] border-y border-border px-4 py-4 text-[9px] font-semibold uppercase tracking-[0.11em] text-text-muted"><span>Cut</span><span>Date</span><span>Pool</span><span>Distributed</span><span>Creators</span><span>Signals</span><span>Status</span></div>
-          <ol>{cutHistory.map((cut) => <li key={cut.id} className="grid min-h-[68px] grid-cols-[0.8fr_1fr_1fr_1fr_0.8fr_0.8fr_0.8fr] items-center border-b border-border px-4 transition-colors duration-200 hover:bg-white/[0.018]"><span className="font-mono text-[11px] text-text-primary">{cut.id}</span><span className="text-[12px] text-text-secondary">{cut.date}</span><span className="text-[13px] font-medium tabular-nums">{currency.format(cut.pool)}</span><span className="text-[13px] font-medium tabular-nums">{currency.format(cut.distributed)}</span><span className="text-[12px] tabular-nums text-text-secondary">{cut.creators}</span><span className="text-[12px] tabular-nums text-text-secondary">{cut.signals}</span><span className="text-[9px] font-semibold uppercase tracking-[0.1em] text-lime">{cut.status}</span></li>)}</ol>
+          <ol>{cutHistory.map((cut) => <li key={cut.id} className="grid min-h-[68px] grid-cols-[0.8fr_1fr_1fr_1fr_0.8fr_0.8fr_0.8fr] items-center border-b border-border px-4 transition-colors duration-200 hover:bg-white/[0.018]"><span className="font-mono text-[11px] text-text-primary">{cut.id}</span><span className="text-[12px] text-text-secondary">{cut.date}</span><span className="text-[13px] font-medium tabular-nums">{formatSol(cut.pool)}</span><span className="text-[13px] font-medium tabular-nums">{formatSol(cut.distributed)}</span><span className="text-[12px] tabular-nums text-text-secondary">{cut.creators}</span><span className="text-[12px] tabular-nums text-text-secondary">{cut.signals}</span><span className="text-[9px] font-semibold uppercase tracking-[0.1em] text-lime">{cut.status}</span></li>)}</ol>
         </section>
 
         <section className="mt-24" aria-labelledby="infrastructure-heading">
           <div className="grid grid-cols-12 gap-14">
-            <div className="col-span-7"><p className="type-label text-text-muted">Protocol layer</p><h2 id="infrastructure-heading" className="mt-4 text-[32px] font-semibold tracking-[-0.04em]">Network & Infrastructure</h2><dl className="mt-8 grid grid-cols-2 border-y border-border">{infrastructureDetails.map((item, index) => <div key={item.label} className={`min-h-[90px] px-6 py-5 ${index % 2 ? "border-l border-border" : ""} ${index < 4 ? "border-b border-border" : ""}`}><dt className="type-label text-text-muted">{item.label}</dt><dd className={`${item.label === "Chain ID" ? "font-mono" : ""} mt-3 text-[14px] font-medium text-text-primary`}>{item.value}{!item.real ? <span className="ml-2 text-[8px] uppercase tracking-[0.09em] text-text-muted">Mock status</span> : null}</dd></div>)}</dl><a href={robinhoodChain.blockExplorers.default.url} target="_blank" rel="noopener noreferrer" className="mt-6 inline-flex items-center gap-2 text-[12px] font-medium text-text-secondary transition-colors duration-200 hover:text-lime">Open Robinhood Chain Explorer <ArrowUpRight aria-hidden="true" className="size-3.5" /></a></div>
-            <div className="col-span-5"><p className="type-label text-text-muted">Deployment state</p><h2 className="mt-4 text-[32px] font-semibold tracking-[-0.04em]">Protocol Contracts</h2><dl className="mt-8 border-y border-border">{protocolContracts.map((contract) => <div key={contract.label} className="flex min-h-[90px] items-center justify-between border-b border-border px-5 last:border-b-0"><div><dt className="text-[13px] font-semibold text-text-primary">{contract.label}</dt><dd className="mt-1.5 text-[10px] text-text-muted">{contract.stage}</dd></div><span className="font-mono text-[9px] uppercase tracking-[0.1em] text-text-secondary">{contract.deployment}</span></div>)}</dl><p className="mt-5 text-[10px] leading-4 text-text-muted">Protocol financial activity on this page is a deterministic prototype scenario.</p></div>
+            <div className="col-span-7"><p className="type-label text-text-muted">Protocol layer</p><h2 id="infrastructure-heading" className="mt-4 text-[32px] font-semibold tracking-[-0.04em]">Network & Infrastructure</h2><dl className="mt-8 grid grid-cols-2 border-y border-border">{infrastructureDetails.map((item, index) => <div key={item.label} className={`min-h-[90px] px-6 py-5 ${index % 2 ? "border-l border-border" : ""} ${index < 4 ? "border-b border-border" : ""}`}><dt className="type-label text-text-muted">{item.label}</dt><dd className={`${item.label === "Cluster" ? "font-mono" : ""} mt-3 text-[14px] font-medium text-text-primary`}>{item.value}{!item.real ? <span className="ml-2 text-[8px] uppercase tracking-[0.09em] text-text-muted">Mock status</span> : null}</dd></div>)}</dl><a href={solanaMainnet.explorerUrl} target="_blank" rel="noopener noreferrer" className="mt-6 inline-flex items-center gap-2 text-[12px] font-medium text-text-secondary transition-colors duration-200 hover:text-lime">Open Solana Explorer <ArrowUpRight aria-hidden="true" className="size-3.5" /></a></div>
+            <div className="col-span-5"><p className="type-label text-text-muted">Deployment state</p><h2 className="mt-4 text-[32px] font-semibold tracking-[-0.04em]">Protocol Programs</h2><dl className="mt-8 border-y border-border">{protocolPrograms.map((program) => <div key={program.label} className="flex min-h-[90px] items-center justify-between border-b border-border px-5 last:border-b-0"><div><dt className="text-[13px] font-semibold text-text-primary">{program.label}</dt><dd className="mt-1.5 text-[10px] text-text-muted">{program.stage}</dd></div><span className="font-mono text-[9px] uppercase tracking-[0.1em] text-text-secondary">{program.deployment}</span></div>)}</dl><p className="mt-5 text-[10px] leading-4 text-text-muted">Protocol financial activity on this page is a deterministic prototype scenario.</p></div>
           </div>
         </section>
 

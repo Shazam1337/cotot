@@ -1,9 +1,9 @@
 export type Creator = {
   id: string;
   handle: `@${string}`;
-  wallet: `0x${string}`;
+  wallet: string;
   impactScore: number;
-  earnedUsd: number;
+  earnedSol: number;
   rank: number;
 };
 
@@ -13,7 +13,7 @@ export type Signal = {
   postId: string;
   reach: number;
   engagements: number;
-  impactUsd: number;
+  impactSol: number;
   capturedAt: string;
   status: "tracking" | "verified";
 };
@@ -21,15 +21,15 @@ export type Signal = {
 export type Payout = {
   id: string;
   creatorId: Creator["id"];
-  amountUsd: number;
-  transactionHash: `0x${string}`;
+  amountSol: number;
+  transactionSignature: string;
   paidAt: string;
   status: "confirmed" | "pending";
 };
 
 export type NetworkMetrics = {
-  creatorPoolUsd: number;
-  feesCapturedUsd: number;
+  creatorPoolSol: number;
+  feesCapturedSol: number;
   creatorsPaid: number;
   liveSignals: number;
   cutsCompleted: number;
@@ -65,7 +65,7 @@ export type HeroActivityEvent = {
 };
 
 export type HeroEconomics = {
-  creatorPoolUsd: number;
+  creatorPoolSol: number;
   change24hPercent: number;
   updatedAt: string;
 };
@@ -74,25 +74,25 @@ export const creators: Creator[] = [
   {
     id: "creator_001",
     handle: "@nora_chain",
-    wallet: "0x71a9c46f8e0b4e8f0a16",
+    wallet: "7YttLkHDo3nRX2QKxNmA8c6veTq9pJwWmB4uFZs1dEoP",
     impactScore: 94.8,
-    earnedUsd: 12482.64,
+    earnedSol: 124.8264,
     rank: 1,
   },
   {
     id: "creator_002",
     handle: "@blocksignal",
-    wallet: "0x38e2d64175ab9fd03c42",
+    wallet: "4mJQ7VxkQnE2Pp9WTcL6aH3zYgU8bNsR5dKf1oXaCev",
     impactScore: 91.2,
-    earnedUsd: 9841.2,
+    earnedSol: 98.412,
     rank: 2,
   },
   {
     id: "creator_003",
     handle: "@miraonchain",
-    wallet: "0x9c0a44de1287a315f906",
+    wallet: "9bKx2FdTq5Wm8LcR3vPn6YhJ1sAeUoG7zQ4NwCkXEtM",
     impactScore: 87.6,
-    earnedUsd: 7650.18,
+    earnedSol: 76.5018,
     rank: 3,
   },
 ];
@@ -104,7 +104,7 @@ export const signals: Signal[] = [
     postId: "1894837120468129954",
     reach: 286400,
     engagements: 18420,
-    impactUsd: 1482.18,
+    impactSol: 14.8218,
     capturedAt: "2026-09-08T08:41:12.000Z",
     status: "verified",
   },
@@ -114,7 +114,7 @@ export const signals: Signal[] = [
     postId: "1894832485613210471",
     reach: 118900,
     engagements: 7241,
-    impactUsd: 628.44,
+    impactSol: 6.2844,
     capturedAt: "2026-09-08T08:38:04.000Z",
     status: "tracking",
   },
@@ -124,24 +124,24 @@ export const payouts: Payout[] = [
   {
     id: "cut_0042_001",
     creatorId: "creator_001",
-    amountUsd: 2184.32,
-    transactionHash: "0x9d6e412a781cdf3b88436c9918ed",
+    amountSol: 21.8432,
+    transactionSignature: "5KzQp7vL2wNm8dRt4xHy9cAe1FjU6oGs3BbTqVnWkXP",
     paidAt: "2026-09-08T04:00:00.000Z",
     status: "confirmed",
   },
   {
     id: "cut_0042_002",
     creatorId: "creator_002",
-    amountUsd: 1640.88,
-    transactionHash: "0x1abf8364dc25a09d88419146eb6f",
+    amountSol: 16.4088,
+    transactionSignature: "3QaJ8mVt6xNc2Rp9YkE5wFs7uHg1oLd4bBZqPnKXWeT",
     paidAt: "2026-09-08T04:00:03.000Z",
     status: "confirmed",
   },
 ];
 
 export const networkMetrics: NetworkMetrics = {
-  creatorPoolUsd: 184291.42,
-  feesCapturedUsd: 842381.2,
+  creatorPoolSol: 1842.9142,
+  feesCapturedSol: 8423.812,
   creatorsPaid: 482,
   liveSignals: 1284,
   cutsCompleted: 42,
@@ -167,8 +167,8 @@ export const donsTapeItems: TapeItem[] = [
     id: "tape_buy",
     tokens: [
       { text: "13:48:04", tone: "muted" },
-      { text: "BUY $481" },
-      { text: "+$0.18 CREATOR POOL", tone: "lime" },
+      { text: "BUY 4.81 SOL" },
+      { text: "+0.0018 SOL CREATOR POOL", tone: "lime" },
     ],
   },
   {
@@ -177,7 +177,7 @@ export const donsTapeItems: TapeItem[] = [
       { text: "13:48:07", tone: "muted" },
       { text: "@ALEX" },
       { text: "REWARD" },
-      { text: "+$4.21", tone: "lime" },
+      { text: "+0.0421 SOL", tone: "lime" },
     ],
   },
   {
@@ -208,14 +208,14 @@ export const donsTapeItems: TapeItem[] = [
     id: "tape_fees",
     tokens: [
       { text: "FEES CAPTURED", tone: "muted" },
-      { text: "$8,423.81" },
+      { text: "84.2381 SOL" },
     ],
   },
   {
     id: "tape_pool",
     tokens: [
       { text: "CREATOR POOL", tone: "muted" },
-      { text: "$1,863.00", tone: "lime" },
+      { text: "18.63 SOL", tone: "lime" },
     ],
   },
 ];
@@ -227,7 +227,7 @@ export const heroActivityEvents: HeroActivityEvent[] = [
     category: "Impact",
     creator: "@stacy",
     value: "Impact 892",
-    detail: "Est. cut $7.12",
+    detail: "Est. cut 0.0712 SOL",
     size: "large",
     placement: { top: "22%", left: "-1%" },
   },
@@ -236,7 +236,7 @@ export const heroActivityEvents: HeroActivityEvent[] = [
     timestamp: "13:48:13",
     category: "Settled",
     creator: "@realDegen",
-    value: "Paid $3.82",
+    value: "Paid 0.0382 SOL",
     accent: true,
     size: "medium",
     placement: { right: "16%", bottom: "17%" },
@@ -253,7 +253,7 @@ export const heroActivityEvents: HeroActivityEvent[] = [
 ];
 
 export const heroEconomics: HeroEconomics = {
-  creatorPoolUsd: 1860.24,
+  creatorPoolSol: 18.6024,
   change24hPercent: 12.8,
   updatedAt: "2026-09-08T13:48:18.000Z",
 };

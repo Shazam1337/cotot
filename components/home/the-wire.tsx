@@ -13,7 +13,7 @@ import {
 } from "@/data/demo-scenario";
 
 const impactSteps = [0, 1, 1, 2, 1, 2];
-const cutSteps = [0, 0.01, 0.02, 0.02, 0.03, 0.04];
+const cutSteps = [0, 0.0001, 0.0002, 0.0002, 0.0003, 0.0004];
 
 export function TheWire() {
   const reduceMotion = useReducedMotion();

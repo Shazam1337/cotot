@@ -13,7 +13,7 @@ export type MockSettlement = {
   creator: `@${string}`;
   amount: number;
   cut: `#${string}`;
-  transaction: `0x${string}`;
+  transaction: string;
   timestamp: string;
   status: "settled";
 };
@@ -29,7 +29,7 @@ export type ProofSettlement = {
   amount: number;
   cut: `#${string}`;
   settlementId: `#${string}`;
-  mockHash: `0x${string}`;
+  mockHash: string;
   timestamp: string;
   status: "settled";
 };
@@ -59,9 +59,9 @@ export type InfrastructureStatus = {
 };
 
 export const proofMetrics: ProofMetrics = {
-  feesCaptured: 8423.81,
-  creatorPool: 1863,
-  distributed: 1254.89,
+  feesCaptured: 84.2381,
+  creatorPool: 18.63,
+  distributed: 12.5489,
   creatorsPaid: 151,
   cutsCompleted: 42,
 };
@@ -69,18 +69,18 @@ export const proofMetrics: ProofMetrics = {
 export const proofCreators = creatorHandles;
 
 const settlementAmounts = [
-  3.82, 4.21, 2.74, 3.14, 5.68, 1.72, 3.96, 2.18, 4.08, 1.14, 6.12, 0.62,
-  2.46, 4.72, 3.38, 7.04, 1.86, 5.24, 2.92, 0.84, 4.46, 3.62, 1.48, 5.92,
+  0.0382, 0.0421, 0.0274, 0.0314, 0.0568, 0.0172, 0.0396, 0.0218, 0.0408, 0.0114, 0.0612, 0.0062,
+  0.0246, 0.0472, 0.0338, 0.0704, 0.0186, 0.0524, 0.0292, 0.0084, 0.0446, 0.0362, 0.0148, 0.0592,
 ] as const;
 
 const transactionHashes = [
-  "0x8A2F...91C4", "0x71D9...AA84", "0x3C21...7F09", "0x95A1...2D70",
-  "0x124B...C921", "0x991C...A728", "0xD481...5E24", "0xA72E...38B1",
-  "0x4F18...D903", "0xB63A...1F82", "0x2E91...6BC7", "0xC740...83AD",
-  "0x56B2...E014", "0xE38D...4A76", "0x09C5...B821", "0xF214...73CE",
-  "0x6D8A...20F5", "0xAB31...9D42", "0x47E6...C183", "0xD905...6A2F",
-  "0x1BC8...F734", "0x83F2...4E19", "0x5A07...D862", "0xCE42...17B9",
-] as const satisfies readonly `0x${string}`[];
+  "5KzQ...WkXP", "3QaJ...XWeT", "8VnR...hL2p", "2FmC...qR7x",
+  "7YtL...dEoP", "4mJQ...XaCe", "9bKx...XEtM", "6RcP...wN3s",
+  "2WdH...kT8v", "8AsN...mP4q", "4JxV...rE6z", "7QpC...yL2n",
+  "3NbT...sK9w", "9LmF...vA5h", "5XeR...pD7c", "2GqW...nU4j",
+  "8HtK...xM6b", "4PvY...eR9s", "7CfN...qT2w", "3ZaL...kJ8m",
+  "9WrP...dV5x", "5BnQ...hF7t", "2MkE...sC4v", "8JxR...pN6q",
+] as const;
 
 export const settlementTemplates: SettlementTemplate[] = proofCreators.map(
   (creator, index) => ({
@@ -123,7 +123,7 @@ export function createLiveSettlement(sequence: number, timestamp: string): MockS
   };
 }
 
-export const mockContract = "0xD0N5...1842";
+export const mockProgram = "DoN5pRog...1842";
 export const nextCutDurationSeconds = 4 * 60 * 60 + 18 * 60 + 42;
 
 const proofInitialTimes = [
@@ -162,13 +162,13 @@ export function createProofSettlement(sequence: number, timestamp: string): Proo
 
 export const proofSettlementCadenceMs = [6_500, 8_200, 7_100, 8_800] as const;
 export const proofFinanceCadenceMs = [9_200, 7_800, 10_400, 8_600] as const;
-export const proofFeeIncrements = [0.31, 0.24, 0.42, 0.36] as const;
-export const proofPoolIncrements = [0.18, 0.09, 0.14, 0.12] as const;
+export const proofFeeIncrements = [0.0031, 0.0024, 0.0042, 0.0036] as const;
+export const proofPoolIncrements = [0.0018, 0.0009, 0.0014, 0.0012] as const;
 
 export const proofValueFlow = {
-  tradeVolume: 48_281,
-  feesGenerated: 184.2,
-  creatorAllocation: 40.52,
+  tradeVolume: 482.81,
+  feesGenerated: 1.842,
+  creatorAllocation: 0.4052,
   currentCut: "#0043",
   treasuryPercent: 78,
   creatorPercent: 22,
@@ -178,33 +178,33 @@ export const currentProofCut = {
   id: "#0043",
   status: "Accumulating",
   started: "09 SEP · 00:00",
-  creatorPool: 1863,
+  creatorPool: 18.63,
   eligibleSignals: 184,
   eligibleCreators: 61,
   stages: ["Accumulating", "Locking", "Scoring", "Settling", "Complete"],
 } as const;
 
 export const cutHistory: CutRecord[] = [
-  { id: "#0042", date: "Sep 08", pool: 184.82, distributed: 172.41, creators: 61, signals: 184, status: "complete" },
-  { id: "#0041", date: "Sep 07", pool: 163.44, distributed: 151.82, creators: 57, signals: 168, status: "complete" },
-  { id: "#0040", date: "Sep 06", pool: 142.18, distributed: 131.74, creators: 52, signals: 149, status: "complete" },
-  { id: "#0039", date: "Sep 05", pool: 128.64, distributed: 119.22, creators: 49, signals: 137, status: "complete" },
-  { id: "#0038", date: "Sep 04", pool: 117.28, distributed: 108.46, creators: 45, signals: 126, status: "complete" },
-  { id: "#0037", date: "Sep 03", pool: 104.92, distributed: 96.84, creators: 42, signals: 118, status: "complete" },
-  { id: "#0036", date: "Sep 02", pool: 92.48, distributed: 84.76, creators: 38, signals: 104, status: "complete" },
-  { id: "#0035", date: "Sep 01", pool: 81.34, distributed: 74.18, creators: 34, signals: 91, status: "complete" },
+  { id: "#0042", date: "Sep 08", pool: 1.8482, distributed: 1.7241, creators: 61, signals: 184, status: "complete" },
+  { id: "#0041", date: "Sep 07", pool: 1.6344, distributed: 1.5182, creators: 57, signals: 168, status: "complete" },
+  { id: "#0040", date: "Sep 06", pool: 1.4218, distributed: 1.3174, creators: 52, signals: 149, status: "complete" },
+  { id: "#0039", date: "Sep 05", pool: 1.2864, distributed: 1.1922, creators: 49, signals: 137, status: "complete" },
+  { id: "#0038", date: "Sep 04", pool: 1.1728, distributed: 1.0846, creators: 45, signals: 126, status: "complete" },
+  { id: "#0037", date: "Sep 03", pool: 1.0492, distributed: 0.9684, creators: 42, signals: 118, status: "complete" },
+  { id: "#0036", date: "Sep 02", pool: 0.9248, distributed: 0.8476, creators: 38, signals: 104, status: "complete" },
+  { id: "#0035", date: "Sep 01", pool: 0.8134, distributed: 0.7418, creators: 34, signals: 91, status: "complete" },
 ];
 
 export const infrastructureDetails: InfrastructureStatus[] = [
-  { label: "Network", value: "Robinhood Chain", real: true },
-  { label: "Chain ID", value: "4663", real: true },
-  { label: "Native Gas", value: "ETH", real: true },
-  { label: "EVM", value: "Compatible", real: true },
-  { label: "Explorer", value: "Robinhood Chain Blockscout", real: true },
+  { label: "Network", value: "Solana", real: true },
+  { label: "Cluster", value: "mainnet-beta", real: true },
+  { label: "Native Gas", value: "SOL", real: true },
+  { label: "Runtime", value: "SVM", real: true },
+  { label: "Explorer", value: "Solana Explorer", real: true },
   { label: "Network Status", value: "Operational", real: false },
 ];
 
-export const protocolContracts = [
+export const protocolPrograms = [
   { label: "Creator Pool", stage: "Prototype", deployment: "Not deployed" },
   { label: "Fee Router", stage: "Prototype", deployment: "Not deployed" },
   { label: "Settlement Router", stage: "Prototype", deployment: "Not deployed" },
@@ -214,12 +214,12 @@ export const systemStatuses = [
   { label: "Signal Indexer", status: "Operational", mocked: true },
   { label: "Scoring Engine", status: "Operational", mocked: true },
   { label: "Settlement Engine", status: "Operational", mocked: true },
-  { label: "Robinhood Chain", status: "Operational", mocked: true },
+  { label: "Solana", status: "Operational", mocked: true },
 ] as const;
 
 export const initialProtocolActivity: ProtocolActivity[] = [
-  { id: "activity-0051", timestamp: "14:42:18", event: "Settlement #0051 completed", detail: "@mira_eth", amount: "$3.82" },
-  { id: "activity-pool", timestamp: "14:42:09", event: "Creator Pool", detail: "Fee allocation received", amount: "+$0.18" },
+  { id: "activity-0051", timestamp: "14:42:18", event: "Settlement #0051 completed", detail: "@mira_eth", amount: "0.0382 SOL" },
+  { id: "activity-pool", timestamp: "14:42:09", event: "Creator Pool", detail: "Fee allocation received", amount: "+0.0018 SOL" },
   { id: "activity-signal", timestamp: "14:41:54", event: "Signal #5021 locked", detail: "Impact 842" },
   { id: "activity-cut", timestamp: "14:41:32", event: "Cut #0043", detail: "184 eligible Signals" },
   { id: "activity-score", timestamp: "14:41:08", event: "Scoring pass completed", detail: "61 eligible creators" },

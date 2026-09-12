@@ -16,6 +16,7 @@ import {
   type CreatorMetrics,
   type CreatorRange,
 } from "@/data/creators";
+import { formatSol } from "@/lib/currency";
 
 type CreatorSort = "don-score" | "reach" | "earned" | "signals";
 type LiveMetric = "donScore" | "reach" | "signals" | "momentum";
@@ -38,13 +39,6 @@ const liveEvents: { creatorId: string; metric: LiveMetric; amount: number }[] = 
   { creatorId: "kate", metric: "momentum", amount: 0.4 },
   { creatorId: "harvey", metric: "signals", amount: 1 },
 ];
-
-const currency = new Intl.NumberFormat("en-US", {
-  style: "currency",
-  currency: "USD",
-  minimumFractionDigits: 2,
-  maximumFractionDigits: 2,
-});
 
 function formatReach(value: number) {
   if (value >= 1_000_000) {
@@ -105,7 +99,7 @@ function TopCreator({
   const secondaryMetrics = [
     { label: "Signals", value: metrics.signals.toString(), metric: "signals" as const },
     { label: "Reach", value: formatReach(metrics.reach), metric: "reach" as const },
-    { label: "Earned", value: currency.format(metrics.earned) },
+    { label: "Earned", value: formatSol(metrics.earned) },
     { label: "Live Signals", value: metrics.liveSignals.toString() },
     { label: "Avg Impact", value: metrics.avgImpact.toString() },
     { label: "Momentum", value: `+${metrics.momentum.toFixed(1)}%`, metric: "momentum" as const },
@@ -214,7 +208,7 @@ function CreatorRows({
             </LiveValue>
           </span>
           <span className="text-[14px] tabular-nums text-text-secondary">{metrics.avgImpact}</span>
-          <span className="text-[14px] font-medium tabular-nums text-text-primary">{currency.format(metrics.earned)}</span>
+          <span className="text-[14px] font-medium tabular-nums text-text-primary">{formatSol(metrics.earned)}</span>
           <span className="text-[13px] font-medium tabular-nums text-lime">
             <LiveValue active={highlight === metricKey(range, creator.id, "momentum")}>
               +{metrics.momentum.toFixed(1)}%

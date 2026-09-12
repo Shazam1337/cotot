@@ -31,7 +31,7 @@ const kulagSha = localFont({
 
 export const metadata: Metadata = {
   title: "DONS — Attention Pays",
-  description: "Creator revenue powered by trading fees on Robinhood Chain.",
+  description: "Creator revenue powered by trading fees on Solana.",
   icons: {
     icon: [{ url: donsLogo.src, type: "image/png" }],
     shortcut: [{ url: donsLogo.src, type: "image/png" }],

@@ -11,13 +11,7 @@ import {
   type LeaderboardEntry,
   type LeaderboardRange,
 } from "@/data/leaderboard";
-
-const currency = new Intl.NumberFormat("en-US", {
-  style: "currency",
-  currency: "USD",
-  minimumFractionDigits: 2,
-  maximumFractionDigits: 2,
-});
+import { formatSol } from "@/lib/currency";
 
 function formatReach(reach: number) {
   if (reach >= 1000000) return `${(reach / 1000000).toFixed(1)}M`;
@@ -90,7 +84,7 @@ function TopCreator({
           <dt className="mt-2 text-[10px] text-text-muted">Reach</dt>
         </div>
         <div>
-          <dd className="text-[17px] font-medium tabular-nums text-text-primary">{currency.format(entry.earned)}</dd>
+          <dd className="text-[17px] font-medium tabular-nums text-text-primary">{formatSol(entry.earned)}</dd>
           <dt className="mt-2 text-[10px] text-text-muted">Earned</dt>
         </div>
       </dl>
@@ -234,7 +228,7 @@ export function TopDons() {
                       <span className="text-[15px] tabular-nums text-text-secondary">{entry.signals}</span>
                       <span className="text-[15px] tabular-nums text-text-secondary">{formatReach(entry.reach)}</span>
                       <span className="text-right text-[15px] font-medium tabular-nums text-text-primary">
-                        {currency.format(entry.earned)}
+                        {formatSol(entry.earned)}
                       </span>
                     </li>
                   );
