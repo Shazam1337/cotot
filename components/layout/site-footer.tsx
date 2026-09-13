@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Container } from "@/components/layout/container";
-import donsLogo from "@/components/logo.png";
+import donsLogo from "@/public/assets/brand/ChatGPT Image 9 сент. 2026 г., 16_03_37.png";
 import { DONS_X_URL } from "@/lib/constants";
 
 const primaryLinks = [

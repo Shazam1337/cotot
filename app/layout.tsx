@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { SiteHeader } from "@/components/layout/site-header";
 import { WalletProvider } from "@/components/wallet/wallet-provider";
-import donsLogo from "@/components/logo.png";
+import donsLogo from "@/public/assets/brand/ChatGPT Image 9 сент. 2026 г., 16_03_37.png";
 import "./globals.css";
 
 const supreme = localFont({

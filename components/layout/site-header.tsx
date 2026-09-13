@@ -4,7 +4,7 @@ import { Container } from "@/components/layout/container";
 import { HeaderNavigation } from "@/components/layout/header-navigation";
 import { LiveDot } from "@/components/ui/live-dot";
 import { WalletButton } from "@/components/wallet/wallet-button";
-import donsLogo from "@/components/logo.png";
+import donsLogo from "@/public/assets/brand/ChatGPT Image 9 сент. 2026 г., 16_03_37.png";
 import { DONS_X_URL } from "@/lib/constants";
 
 export function SiteHeader() {
