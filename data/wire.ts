@@ -54,7 +54,7 @@ export const wireSignals: WireSignal[] = [
   {
     id: "04308", sequence: 4308, creatorId: "mira", status: "tracking", timestamp: "14:18:42", relativeTime: "11m ago",
     impact: 812, estimatedCut: 0.0482, impressions: 18400, engagements: 742, engagementRate: 4.0, hot: true, velocity: 28,
-    post: "DONS is one of the more interesting experiments on Solana right now. Instead of paying creators upfront, it routes part of trading fees back to the people generating attention.",
+    post: "COTOT is one of the more interesting experiments on Solana right now. Instead of paying creators upfront, it routes part of trading fees back to the people generating attention.",
     media: { kicker: "Creator revenue network", headline: "ATTENTION EARNS.", note: "Every verified signal enters the cut." },
   },
   {
@@ -81,7 +81,7 @@ export const wireSignals: WireSignal[] = [
   {
     id: "04303", sequence: 4303, creatorId: "kira", status: "tracking", timestamp: "14:02:19", relativeTime: "27m ago",
     impact: 776, estimatedCut: 0.0514, impressions: 17900, engagements: 804, engagementRate: 4.5,
-    post: "The strongest part of DONS is that the reward is downstream of actual response. No engagement theater, just measured contribution.",
+    post: "The strongest part of COTOT is that the reward is downstream of actual response. No engagement theater, just measured contribution.",
   },
   {
     id: "04302", sequence: 4302, creatorId: "harvey", status: "paid", timestamp: "13:58:46", relativeTime: "31m ago",
@@ -91,7 +91,7 @@ export const wireSignals: WireSignal[] = [
   {
     id: "04301", sequence: 4301, creatorId: "zoe", status: "verified", timestamp: "13:55:12", relativeTime: "34m ago",
     impact: 584, estimatedCut: 0.0246, impressions: 10800, engagements: 419, engagementRate: 3.9,
-    post: "Communities are part of market infrastructure. DONS is making that contribution legible instead of pretending it is free.",
+    post: "Communities are part of market infrastructure. COTOT is making that contribution legible instead of pretending it is free.",
   },
   {
     id: "04300", sequence: 4300, creatorId: "fox", status: "scored", timestamp: "13:51:03", relativeTime: "38m ago",
@@ -107,7 +107,7 @@ export const wireSignals: WireSignal[] = [
   {
     id: "04298", sequence: 4298, creatorId: "matt", status: "detected", timestamp: "13:43:20", relativeTime: "46m ago",
     impact: 361, estimatedCut: 0.0084, impressions: 4900, engagements: 181, engagementRate: 3.7,
-    post: "New distribution rails are forming around attention. Keeping an eye on how DONS separates noise from useful reach.",
+    post: "New distribution rails are forming around attention. Keeping an eye on how COTOT separates noise from useful reach.",
   },
   {
     id: "04297", sequence: 4297, creatorId: "stella", status: "paid", timestamp: "13:39:17", relativeTime: "50m ago",
@@ -122,12 +122,12 @@ export const wireSignals: WireSignal[] = [
   {
     id: "04295", sequence: 4295, creatorId: "leo", status: "scored", timestamp: "13:31:42", relativeTime: "58m ago",
     impact: 667, estimatedCut: 0.0338, impressions: 12800, engagements: 526, engagementRate: 4.1,
-    post: "A post becomes infrastructure when it reliably moves a network. DONS is trying to price that transition.",
+    post: "A post becomes infrastructure when it reliably moves a network. COTOT is trying to price that transition.",
   },
   {
     id: "04294", sequence: 4294, creatorId: "mira", status: "paid", timestamp: "13:27:18", relativeTime: "1h ago",
     impact: 758, estimatedCut: 0.0524, impressions: 17500, engagements: 761, engagementRate: 4.3,
-    post: "First DONS cut landed. The amount is modest, which makes the mechanism feel more credible at this stage — real usage before scale.",
+    post: "First COTOT cut landed. The amount is modest, which makes the mechanism feel more credible at this stage — real usage before scale.",
   },
 ];
 
@@ -142,7 +142,7 @@ export const liveSignalTemplates: Omit<WireSignal, "id" | "sequence" | "timestam
   },
   {
     creatorId: "kate", status: "tracking", impact: 784, estimatedCut: 0.0592, impressions: 18100, engagements: 842, engagementRate: 4.7,
-    post: "DONS activity is accelerating into the current cut. Creator attribution looks increasingly like core market data.",
+    post: "COTOT activity is accelerating into the current cut. Creator attribution looks increasingly like core market data.",
   },
 ];
 

@@ -3,8 +3,8 @@ import { CreatorsPage } from "@/components/creators/creators-page";
 import { SiteFooter } from "@/components/layout/site-footer";
 
 export const metadata: Metadata = {
-  title: "Creators — DONS",
-  description: "The creator discovery and reputation layer of DONS.",
+  title: "Creator Index — COTOT",
+  description: "Discover the creators generating measurable network value.",
 };
 
 export default function CreatorsRoute() {

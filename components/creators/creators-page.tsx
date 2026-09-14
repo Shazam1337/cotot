@@ -27,7 +27,7 @@ type RankedCreator = {
 };
 
 const sortOptions: { id: CreatorSort; label: string }[] = [
-  { id: "don-score", label: "Don Score" },
+  { id: "don-score", label: "Creator Impact" },
   { id: "reach", label: "Reach" },
   { id: "earned", label: "Earned" },
   { id: "signals", label: "Signals" },
@@ -128,7 +128,7 @@ function TopCreator({
         </div>
 
         <div className={leader ? "mt-12" : "mt-14"}>
-          <p className="type-label text-text-muted">Don Score</p>
+          <p className="type-label text-text-muted">Creator Impact</p>
           <data
             value={metrics.donScore}
             className={`${leader ? "text-[92px] text-lime" : "text-[66px] text-text-primary"} mt-4 block font-medium leading-none tracking-[-0.06em] tabular-nums`}
@@ -225,7 +225,7 @@ function RankingHeader() {
     <div className="grid grid-cols-[70px_minmax(190px,1.55fr)_0.82fr_0.7fr_0.8fr_0.82fr_0.82fr_0.8fr] gap-5 border-y border-border px-3 py-4 text-[9px] font-semibold uppercase tracking-[0.11em] text-text-muted">
       <span>Rank</span>
       <span>Creator</span>
-      <span>Don Score</span>
+      <span>Creator Impact</span>
       <span>Signals</span>
       <span>Reach</span>
       <span>Avg Impact</span>
@@ -330,21 +330,21 @@ export function CreatorsPage() {
   return (
     <section id="creators" aria-labelledby="creators-page-heading">
       <Container className="pb-[132px] pt-[92px]">
-        <div className="grid grid-cols-12 items-end gap-8">
-          <div className="col-span-8">
+        <div className="grid grid-cols-1 items-end gap-8 lg:grid-cols-12">
+          <div className="lg:col-span-8">
             <p className="type-label flex items-center gap-3 text-text-muted">
               <span className="h-px w-9 bg-lime" />
-              Creator network
+              Network intelligence
             </p>
             <h1 id="creators-page-heading" className="type-section-title mt-6 text-text-primary">
-              Creators
+              Creator Index
             </h1>
             <p className="mt-7 text-[20px] leading-[1.38] tracking-[-0.015em] text-text-secondary">
-              The people moving attention through DONS.
+              The people moving attention through COTOT.
             </p>
           </div>
 
-          <div className="col-span-4 flex justify-end pb-1">
+          <div className="flex justify-start pb-1 lg:col-span-4 lg:justify-end">
             <div className="min-w-[190px] border-l border-border pl-5">
               <p className="type-label flex items-center gap-2 text-lime"><LiveDot /> Live</p>
               <p className="mt-3 text-[12px] text-text-secondary">148 creators rewarded</p>
@@ -441,7 +441,7 @@ export function CreatorsPage() {
                 <div className="flex items-end justify-between">
                   <div>
                     <p className="type-label text-text-muted">Recent momentum</p>
-                    <h2 id="rising-dons-heading" className="mt-4 text-[28px] font-semibold tracking-[-0.035em] text-text-primary">Rising Dons</h2>
+                    <h2 id="rising-dons-heading" className="mt-4 text-[28px] font-semibold tracking-[-0.035em] text-text-primary">Rising Creators</h2>
                   </div>
                   <p className="text-[11px] text-text-muted">Movement this week</p>
                 </div>
@@ -465,7 +465,7 @@ export function CreatorsPage() {
                     ["Active Creators", summary.activeCreators.toString()],
                     ["Total Signals", summary.totalSignals.toLocaleString("en-US")],
                     ["Total Reach", formatReach(summary.totalReach)],
-                    ["Avg Don Score", summary.avgDonScore.toString()],
+                    ["Avg Creator Impact", summary.avgDonScore.toString()],
                     ["Creators Rewarded", summary.creatorsRewarded.toString()],
                   ].map(([label, value], index) => (
                     <div key={label} className={`${index ? "border-l border-border pl-7" : ""}`}><dd className="text-[30px] font-medium tracking-[-0.045em] tabular-nums text-text-primary">{value}</dd><dt className="mt-3 text-[10px] text-text-muted">{label}</dt></div>

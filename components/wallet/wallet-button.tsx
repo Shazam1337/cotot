@@ -50,7 +50,8 @@ export function WalletButton() {
             className="flex h-9 cursor-pointer items-center gap-2.5 rounded-[3px] border border-[#385629] bg-[#102317] px-3.5 font-mono text-[11px] text-text-primary transition-colors duration-200 hover:border-[#4a7140] hover:bg-[#142a1b] focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-lime"
           >
             <LiveDot />
-            {shortenAddress(address)}
+            <span className="sm:hidden">Wallet</span>
+            <span className="hidden sm:inline">{shortenAddress(address)}</span>
             <ChevronDown
               aria-hidden="true"
               className={`size-3 text-text-muted transition-transform duration-200 ${menuOpen ? "rotate-180" : ""}`}
@@ -70,7 +71,8 @@ export function WalletButton() {
             className="flex h-9 cursor-pointer items-center gap-2 rounded-[3px] border border-border-strong bg-surface/50 px-3.5 font-sans text-[12px] font-medium text-text-primary transition-colors duration-200 hover:border-white/25 hover:bg-surface-hover disabled:cursor-wait disabled:text-text-muted focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-lime"
           >
             <Wallet aria-hidden="true" className="size-3.5 text-text-secondary" strokeWidth={1.7} />
-            {isReconnecting ? "Restoring Wallet" : "Connect Wallet"}
+            <span className="sm:hidden">{isReconnecting ? "Restoring" : "Connect"}</span>
+            <span className="hidden sm:inline">{isReconnecting ? "Restoring Wallet" : "Connect Wallet"}</span>
           </motion.button>
         )}
       </AnimatePresence>

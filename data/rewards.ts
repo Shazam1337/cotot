@@ -85,7 +85,7 @@ export const rewardBreakdown: RewardBreakdown = {
 
 export const initialRewardActivity: RewardActivity[] = [
   { id: "activity-5012", label: "Signal #5012 entered Tracking", detail: "Estimated Cut +0.0012 SOL", time: "2m ago", status: "live" },
-  { id: "activity-score", label: "Don Score +2", detail: "Creator reputation updated", time: "18m ago" },
+  { id: "activity-score", label: "Creator Impact +2", detail: "Creator reputation updated", time: "18m ago" },
   { id: "activity-0042", label: "Cut #0042 settled", detail: "0.0874 SOL paid", time: "1h ago" },
   { id: "activity-4988", label: "Signal #4988 paid", detail: "Settlement #0048", time: "1h ago" },
 ];

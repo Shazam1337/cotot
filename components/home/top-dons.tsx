@@ -58,14 +58,14 @@ function TopCreator({
         </div>
 
         <div className="mt-12">
-          <p className="type-label text-text-muted">Don Score</p>
+          <p className="type-label text-text-muted">Creator Impact</p>
           <data
             value={entry.donScore}
             className={`${isLeader ? "text-[78px] text-lime" : "text-[58px] text-text-primary"} mt-4 block font-medium leading-none tracking-[-0.055em] tabular-nums`}
           >
             {entry.donScore}
           </data>
-          <div className="mt-6 h-px bg-white/8">
+          <div className="mt-6 h-px bg-border">
             <div
               className={`${isLeader ? "bg-lime/75" : "bg-text-muted/55"} h-px`}
               style={{ width: `${entry.donScore / 10}%` }}
@@ -125,21 +125,21 @@ export function TopDons() {
   return (
     <section id="top-dons" aria-labelledby="top-dons-heading" className="border-b border-border">
       <Container className="pb-32 pt-[132px]">
-        <div className="grid grid-cols-12 items-end gap-8">
-          <div className="col-span-7">
+        <div className="grid grid-cols-1 items-end gap-8 lg:grid-cols-12">
+          <div className="lg:col-span-7">
             <p className="type-label flex items-center gap-3 text-text-muted">
               <span className="h-px w-9 bg-lime" />
-              Creator ranking
+              Creator index
             </p>
             <h2 id="top-dons-heading" className="type-section-title mt-6 text-text-primary">
-              Top Dons
+              Who moves culture?
             </h2>
             <p className="mt-7 text-[20px] tracking-[-0.015em] text-text-secondary">
-              The creators moving the network.
+              A live ranking built from signal quality, reach and earned SOL.
             </p>
           </div>
 
-          <div className="col-span-5 flex justify-end pb-1">
+          <div className="flex justify-start overflow-x-auto pb-1 lg:col-span-5 lg:justify-end">
             <div role="tablist" aria-label="Leaderboard time range" className="flex items-center gap-7">
               {leaderboardRanges.map((item) => {
                 const active = range === item.id;
@@ -179,7 +179,7 @@ export function TopDons() {
             transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
             className="mt-14"
           >
-            <div className="grid grid-cols-[1.18fr_1fr_1fr] border-y border-border bg-bg-elevated/24">
+            <div className="grid grid-cols-1 border-y border-border bg-bg-elevated/24 lg:grid-cols-[1.18fr_1fr_1fr]">
               {topThree.map((entry, index) => (
                 <TopCreator
                   key={entry.creatorId}
@@ -190,17 +190,17 @@ export function TopDons() {
               ))}
             </div>
 
-            <div className="mt-16">
-              <div className="grid grid-cols-[80px_1.5fr_0.8fr_0.7fr_0.8fr_0.8fr] gap-6 border-b border-border pb-4 text-[9px] font-semibold uppercase tracking-[0.12em] text-text-muted">
+            <div className="mt-16 overflow-x-auto">
+              <div className="grid min-w-[760px] grid-cols-[80px_1.5fr_0.8fr_0.7fr_0.8fr_0.8fr] gap-6 border-b border-border pb-4 text-[9px] font-semibold uppercase tracking-[0.12em] text-text-muted">
                 <span>Rank</span>
                 <span>Creator</span>
-                <span>Don Score</span>
+                <span>Creator Impact</span>
                 <span>Signals</span>
                 <span>Reach</span>
                 <span className="text-right">Earned</span>
               </div>
 
-              <ol>
+              <ol className="min-w-[760px]">
                 {lowerRanks.map((entry, index) => {
                   const creator = creators.get(entry.creatorId)!;
                   const displayedScore =
@@ -218,8 +218,8 @@ export function TopDons() {
                       <motion.data
                         key={`${entry.creatorId}_${displayedScore}`}
                         value={displayedScore}
-                        initial={reduceMotion ? false : { color: "#b7ff3c" }}
-                        animate={{ color: "#f1f2ea" }}
+                        initial={reduceMotion ? false : { color: "#72e875" }}
+                        animate={{ color: "#102317" }}
                         transition={{ duration: 0.9 }}
                         className="text-[18px] font-medium tabular-nums"
                       >

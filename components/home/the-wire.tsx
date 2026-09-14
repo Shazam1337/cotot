@@ -65,23 +65,22 @@ export function TheWire() {
   return (
     <section id="wire" aria-labelledby="wire-heading" className="border-b border-border">
       <Container className="pb-28 pt-[88px]">
-        <div className="grid grid-cols-12 items-end gap-8">
-          <div className="col-span-8">
+        <div className="grid grid-cols-1 items-end gap-8 lg:grid-cols-12">
+          <div className="lg:col-span-8">
             <p className="type-label flex items-center gap-3 text-text-muted">
               <span className="h-px w-9 bg-lime" />
-              Live creator network
+              Live signal desk
             </p>
             <h2 id="wire-heading" className="type-section-title mt-6 text-text-primary">
-              The Wire
+              Signals, live.
             </h2>
             <p className="mt-7 text-[20px] leading-[1.38] tracking-[-0.015em] text-text-secondary">
-              <span className="block">Real posts.</span>
-              <span className="block">Real attention.</span>
-              <span className="block">Real rewards.</span>
+              <span className="block">Watch creator impact move</span>
+              <span className="block">from detection to settlement.</span>
             </p>
           </div>
 
-          <div className="col-span-4 flex justify-end pb-1">
+          <div className="flex justify-start pb-1 lg:col-span-4 lg:justify-end">
             <div className="min-w-[176px] border-l border-border pl-5">
               <p className="type-label flex items-center gap-2 text-lime">
                 <LiveDot />
@@ -95,7 +94,7 @@ export function TheWire() {
           </div>
         </div>
 
-        <div className="mt-14 grid grid-cols-[minmax(0,1.78fr)_minmax(330px,1fr)] items-stretch gap-8">
+        <div className="mt-14 grid grid-cols-1 items-stretch gap-8 xl:grid-cols-[minmax(0,1.78fr)_minmax(330px,1fr)]">
           <AnimatePresence initial={false} mode="wait">
             <motion.div
               key={featured.id}

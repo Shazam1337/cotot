@@ -51,7 +51,7 @@ export function WalletMenu({ address, onClose }: WalletMenuProps) {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: reduceMotion ? 0 : -4 }}
       transition={{ duration: reduceMotion ? 0 : 0.18, ease: [0.22, 1, 0.36, 1] }}
-      className="absolute right-0 top-[calc(100%+10px)] z-40 w-[286px] border border-border-strong bg-[#080b08] shadow-[0_18px_55px_rgba(0,0,0,0.5)]"
+      className="theme-dark absolute right-0 top-[calc(100%+10px)] z-40 w-[286px] border border-border-strong bg-[#10231d] shadow-[0_18px_55px_rgba(0,0,0,0.5)]"
     >
       <div className="border-b border-border px-5 py-5">
         <p className="type-label text-text-muted">Connected wallet</p>

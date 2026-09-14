@@ -3,8 +3,8 @@ import { SiteFooter } from "@/components/layout/site-footer";
 import { WirePage } from "@/components/wire/wire-page";
 
 export const metadata: Metadata = {
-  title: "The Wire — DONS",
-  description: "The live stream of creator attention moving through DONS.",
+  title: "Live Signals — COTOT",
+  description: "Follow creator attention from detection to settlement.",
 };
 
 export default function WireRoute() {

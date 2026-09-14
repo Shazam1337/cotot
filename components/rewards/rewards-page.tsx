@@ -80,7 +80,7 @@ function PageIntro({ address }: { address: string }) {
           Personal rewards
         </p>
         <h1 id="rewards-page-heading" className="type-section-title mt-6 text-text-primary">
-          Your Cut
+          Creator Rewards
         </h1>
         <p className="mt-7 text-[20px] leading-[1.38] tracking-[-0.015em] text-text-secondary">
           Your share of the attention you helped create.
@@ -120,17 +120,19 @@ function DisconnectedRewards() {
             Personal rewards
           </p>
           <h1 id="rewards-page-heading" className="type-section-title mt-6 text-text-primary">
-            Your Cut
+            Creator Rewards
           </h1>
           <p className="mt-8 max-w-[650px] text-[21px] leading-[1.45] tracking-[-0.015em] text-text-secondary">
-            Connect your Solana wallet to view your DONS rewards.
+            Connect your Solana wallet to view your COTOT rewards.
           </p>
           <button
             type="button"
             onClick={openWalletModal}
-            className="mt-10 flex h-12 cursor-pointer items-center gap-3 border border-[#4a7139] bg-[#102317] px-6 text-[13px] font-semibold text-text-primary transition-colors duration-200 hover:border-lime/55 hover:bg-[#142a1b] focus-visible:outline-1 focus-visible:outline-offset-3 focus-visible:outline-lime"
+            className="mt-10 inline-flex h-13 cursor-pointer items-center gap-3 rounded-full border border-[#102317] bg-[#102317] px-6 text-[14px] font-semibold text-[#f7f6f0] shadow-[0_8px_24px_rgba(16,35,23,0.12)] transition-[background-color,transform,box-shadow] duration-200 hover:-translate-y-0.5 hover:bg-[#1a3b2c] hover:shadow-[0_12px_30px_rgba(16,35,23,0.18)] focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#102317]"
           >
-            <Wallet aria-hidden="true" className="size-4 text-lime" strokeWidth={1.7} />
+            <span className="grid size-7 place-items-center rounded-full bg-lime text-[#102317]">
+              <Wallet aria-hidden="true" className="size-3.5" strokeWidth={1.9} />
+            </span>
             Connect Wallet
           </button>
           <p className="mt-7 max-w-[520px] text-[12px] leading-5 text-text-muted">
@@ -368,7 +370,7 @@ function RewardsDashboard({ address }: { address: string }) {
 
         <div className="mt-14 flex items-center justify-between border-b border-border pb-5">
           <div className="flex items-center gap-3.5"><span className="grid size-10 place-items-center rounded-full border border-border-strong bg-surface/55 text-[10px] font-semibold text-text-secondary">{creator.initials}</span><div><p className="text-[15px] font-semibold text-text-primary">{creator.handle}</p><p className="mt-1 text-[10px] text-text-muted">Verified Creator · Mock profile</p></div></div>
-          <div className="flex items-center gap-8"><div><p className="type-label text-text-muted">Don Score</p><p className="mt-2 text-[18px] font-medium tabular-nums text-text-primary">{personalPerformance.donScore}</p></div><div><p className="type-label text-text-muted">Season Rank</p><p className="mt-2 font-mono text-[16px] text-text-primary">{personalPerformance.seasonRank}</p></div></div>
+          <div className="flex items-center gap-8"><div><p className="type-label text-text-muted">Creator Impact</p><p className="mt-2 text-[18px] font-medium tabular-nums text-text-primary">{personalPerformance.donScore}</p></div><div><p className="type-label text-text-muted">Season Rank</p><p className="mt-2 font-mono text-[16px] text-text-primary">{personalPerformance.seasonRank}</p></div></div>
         </div>
 
         <div className="grid grid-cols-[1.25fr_1fr] border-b border-border">
@@ -387,7 +389,7 @@ function RewardsDashboard({ address }: { address: string }) {
 
         <div className="mt-20 grid grid-cols-[0.74fr_1.26fr] gap-12">
           <section className="border-y border-border py-7" aria-labelledby="current-cut-heading"><div className="flex items-center justify-between"><h2 id="current-cut-heading" className="type-label text-text-secondary">Current Cut</h2><p className="type-label flex items-center gap-2 text-lime"><LiveDot /> {currentRewardCut.status}</p></div><p className="mt-7 font-mono text-[31px] text-text-primary">{currentRewardCut.id}</p><dl className="mt-7 grid grid-cols-2 border-t border-border pt-6"><div className="border-r border-border pr-6"><dt className="type-label text-text-muted">Next Cut</dt><dd className="mt-3 font-mono text-[18px] tabular-nums text-text-primary">{formatCountdown(secondsRemaining)}</dd></div><div className="pl-6"><dt className="type-label text-text-muted">Your Estimated Cut</dt><dd className="mt-3 text-[23px] font-medium tabular-nums text-lime"><HighlightValue active={highlight === "estimated-cut"}>{formatSol(estimatedCut)}</HighlightValue></dd></div></dl></section>
-          <section className="border-y border-border py-7" aria-labelledby="performance-heading"><h2 id="performance-heading" className="type-label text-text-secondary">Creator Performance</h2><dl className="mt-7 grid grid-cols-5 divide-x divide-border"><div><dd className="text-[25px] font-medium tabular-nums">{personalPerformance.signals}</dd><dt className="mt-3 text-[10px] text-text-muted">Your Signals</dt></div><div className="pl-6"><dd className="text-[25px] font-medium tabular-nums">{personalPerformance.avgImpact}</dd><dt className="mt-3 text-[10px] text-text-muted">Avg Impact</dt></div><div className="pl-6"><dd className="text-[25px] font-medium tabular-nums">{formatReach(personalPerformance.totalReach)}</dd><dt className="mt-3 text-[10px] text-text-muted">Total Reach</dt></div><div className="pl-6"><dd className="text-[25px] font-medium tabular-nums">{personalPerformance.donScore}</dd><dt className="mt-3 text-[10px] text-text-muted">Don Score</dt></div><div className="pl-6"><dd className="font-mono text-[23px]">{personalPerformance.seasonRank}</dd><dt className="mt-3 text-[10px] text-text-muted">Season Rank</dt></div></dl></section>
+          <section className="border-y border-border py-7" aria-labelledby="performance-heading"><h2 id="performance-heading" className="type-label text-text-secondary">Creator Performance</h2><dl className="mt-7 grid grid-cols-5 divide-x divide-border"><div><dd className="text-[25px] font-medium tabular-nums">{personalPerformance.signals}</dd><dt className="mt-3 text-[10px] text-text-muted">Your Signals</dt></div><div className="pl-6"><dd className="text-[25px] font-medium tabular-nums">{personalPerformance.avgImpact}</dd><dt className="mt-3 text-[10px] text-text-muted">Avg Impact</dt></div><div className="pl-6"><dd className="text-[25px] font-medium tabular-nums">{formatReach(personalPerformance.totalReach)}</dd><dt className="mt-3 text-[10px] text-text-muted">Total Reach</dt></div><div className="pl-6"><dd className="text-[25px] font-medium tabular-nums">{personalPerformance.donScore}</dd><dt className="mt-3 text-[10px] text-text-muted">Creator Impact</dt></div><div className="pl-6"><dd className="font-mono text-[23px]">{personalPerformance.seasonRank}</dd><dt className="mt-3 text-[10px] text-text-muted">Season Rank</dt></div></dl></section>
         </div>
 
         <section className="mt-24" aria-labelledby="rewarded-signals-heading">
@@ -418,7 +420,7 @@ export function RewardsPage() {
     return (
       <section aria-labelledby="rewards-page-heading">
         <Container className="flex min-h-[650px] items-center py-24">
-          <div><p className="type-label flex items-center gap-3 text-text-muted"><span className="h-px w-9 bg-lime" /> Personal rewards</p><h1 id="rewards-page-heading" className="type-section-title mt-6 text-text-primary">Your Cut</h1><p className="mt-8 text-[14px] text-text-muted">Restoring wallet connection...</p></div>
+          <div><p className="type-label flex items-center gap-3 text-text-muted"><span className="h-px w-9 bg-lime" /> Personal rewards</p><h1 id="rewards-page-heading" className="type-section-title mt-6 text-text-primary">Creator Rewards</h1><p className="mt-8 text-[14px] text-text-muted">Restoring wallet connection...</p></div>
         </Container>
       </section>
     );

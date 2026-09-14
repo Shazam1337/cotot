@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import { Container } from "@/components/layout/container";
-import donsHeroNetwork from "@/public/assets/brand/dons-hero-network.png";
+import heroNetworkImage from "@/public/assets/brand/dons-hero-network.png";
 
 const economicFlow = [
   "Posts",
@@ -41,7 +41,7 @@ export function AttentionBecomesValue() {
             className="type-label flex items-center gap-3 text-text-muted"
           >
             <span className="h-px w-9 bg-lime" />
-            The DONS loop
+            The COTOT loop
           </motion.p>
 
           <motion.h2
@@ -69,7 +69,7 @@ export function AttentionBecomesValue() {
           <motion.ol
             variants={reveal}
             transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
-            aria-label="DONS economic flow"
+            aria-label="COTOT economic flow"
             className="mt-10 grid grid-cols-6 border-t border-border"
           >
             {economicFlow.map((stage, index) => (
@@ -110,8 +110,8 @@ export function AttentionBecomesValue() {
         >
           <div className="absolute left-0 top-1/2 h-[570px] w-[clamp(740px,58vw,850px)] -translate-y-1/2 [mask-image:linear-gradient(to_right,transparent_0%,black_22%,black_90%,transparent_100%)]">
             <Image
-              src={donsHeroNetwork}
-              alt="DONS attention network showing posts becoming activity, fees, and creator rewards"
+              src={heroNetworkImage}
+              alt="COTOT attention network showing posts becoming activity, fees, and creator rewards"
               fill
               quality={100}
               sizes="(min-width: 1600px) 850px, 58vw"

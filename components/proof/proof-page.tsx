@@ -179,14 +179,14 @@ export function ProofPage() {
   return (
     <section id="proof-page" aria-labelledby="proof-page-heading">
       <Container className="pb-[132px] pt-[92px]">
-        <div className="grid grid-cols-12 items-end gap-8">
-          <div className="col-span-8">
+        <div className="grid grid-cols-1 items-end gap-8 lg:grid-cols-12">
+          <div className="lg:col-span-8">
             <p className="type-label flex items-center gap-3 text-text-muted">
               <span className="h-px w-9 bg-lime" />
-              Onchain transparency
+              Open economics
             </p>
             <h1 id="proof-page-heading" className="type-section-title mt-6 text-text-primary">
-              Proof
+              Open Ledger
             </h1>
             <p className="mt-7 text-[20px] leading-[1.38] tracking-[-0.015em] text-text-secondary">
               <span className="block">Every cut.</span>
@@ -194,7 +194,7 @@ export function ProofPage() {
               <span className="block">Visible.</span>
             </p>
           </div>
-          <div className="col-span-4 flex justify-end pb-1">
+          <div className="flex justify-start pb-1 lg:col-span-4 lg:justify-end">
             <dl className="min-w-[210px] border-l border-border pl-5">
               <div>
                 <dt className="type-label text-text-muted">Solana</dt>

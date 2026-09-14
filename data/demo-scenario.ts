@@ -126,7 +126,7 @@ export const demoSignals: DemoSignal[] = [
     engagements: 824,
     engagementRate: 4.5,
     post: [
-      "DONS turns attention into ownership.",
+      "COTOT turns attention into ownership.",
       "Creators finally earn a cut of the volume they help create.",
       "Built on Solana.",
     ],
@@ -282,7 +282,7 @@ export const demoSignals: DemoSignal[] = [
     impressions: 5200,
     engagements: 214,
     engagementRate: 4.1,
-    post: ["The feed is a market surface. DONS makes it accountable."],
+    post: ["The feed is a market surface. COTOT makes it accountable."],
     mediaKicker: "Signal detected",
     mediaTitle: "WATCH THE WIRE.",
   },

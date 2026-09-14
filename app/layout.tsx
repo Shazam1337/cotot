@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { SiteHeader } from "@/components/layout/site-header";
 import { WalletProvider } from "@/components/wallet/wallet-provider";
-import donsLogo from "@/public/assets/brand/ChatGPT Image 9 сент. 2026 г., 16_03_37.png";
+import cototLogo from "@/public/assets/brand/ChatGPT Image 9 сент. 2026 г., 16_03_37.png";
 import "./globals.css";
 
 const supreme = localFont({
@@ -30,11 +30,11 @@ const kulagSha = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "DONS — Attention Pays",
-  description: "Creator revenue powered by trading fees on Solana.",
+  title: "COTOT — Proof of Attention",
+  description: "Measure creator impact and share network value transparently on Solana.",
   icons: {
-    icon: [{ url: donsLogo.src, type: "image/png" }],
-    shortcut: [{ url: donsLogo.src, type: "image/png" }],
+    icon: [{ url: cototLogo.src, type: "image/png" }],
+    shortcut: [{ url: cototLogo.src, type: "image/png" }],
   },
 };
 

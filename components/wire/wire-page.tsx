@@ -157,21 +157,21 @@ export function WirePage() {
   return (
     <section id="wire" aria-labelledby="wire-page-heading">
       <Container className="pb-[132px] pt-[92px]">
-        <div className="grid grid-cols-12 items-end gap-8">
-          <div className="col-span-8">
+        <div className="grid grid-cols-1 items-end gap-8 lg:grid-cols-12">
+          <div className="lg:col-span-8">
             <p className="type-label flex items-center gap-3 text-text-muted">
               <span className="h-px w-9 bg-lime" />
-              Live creator network
+              Signal intelligence
             </p>
             <h1 id="wire-page-heading" className="type-section-title mt-6 text-text-primary">
-              The Wire
+              Live Signals
             </h1>
             <p className="mt-7 text-[20px] leading-[1.38] tracking-[-0.015em] text-text-secondary">
-              The live stream of attention moving through DONS.
+              Follow creator attention from detection to settlement.
             </p>
           </div>
 
-          <div className="col-span-4 flex justify-end pb-1">
+          <div className="flex justify-start pb-1 lg:col-span-4 lg:justify-end">
             <div className="min-w-[190px] border-l border-border pl-5">
               <p className="type-label flex items-center gap-2 text-lime">
                 <LiveDot /> Live

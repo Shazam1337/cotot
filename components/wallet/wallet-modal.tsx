@@ -75,7 +75,7 @@ export function WalletModal({ open, onClose }: { open: boolean; onClose: () => v
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: reduceMotion ? 0 : 4 }}
             transition={{ duration: reduceMotion ? 0 : 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="relative w-full max-w-[430px] border border-border-strong bg-[#080b08] shadow-[0_24px_80px_rgba(0,0,0,0.48)]"
+            className="theme-dark relative w-full max-w-[430px] border border-border-strong bg-[#10231d] shadow-[0_24px_80px_rgba(0,0,0,0.48)]"
           >
             <div className="flex items-start justify-between border-b border-border px-7 py-6">
               <div>
@@ -84,7 +84,7 @@ export function WalletModal({ open, onClose }: { open: boolean; onClose: () => v
                   id="wallet-dialog-heading"
                   className="mt-4 text-[24px] font-semibold tracking-[-0.035em] text-text-primary"
                 >
-                  Connect to DONS
+                  Connect to COTOT
                 </h2>
                 <p className="mt-2 text-[13px] leading-5 text-text-secondary">
                   Connect a Solana wallet to enter the network.

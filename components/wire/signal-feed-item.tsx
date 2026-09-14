@@ -34,7 +34,7 @@ export function SignalFeedItem({
       initial={reduceMotion ? false : { opacity: 0, y: fresh ? -6 : 4 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: reduceMotion ? 0 : 0.36, ease: [0.22, 1, 0.36, 1] }}
-      className="border border-white/10 bg-bg-elevated/52"
+      className="overflow-hidden rounded-[26px] border border-border bg-bg-elevated/72 shadow-[0_10px_34px_rgba(16,35,23,0.045)]"
     >
       {signal.hot ? (
         <div className="flex items-center justify-between border-b border-border px-7 py-3">
@@ -60,7 +60,7 @@ export function SignalFeedItem({
           </div>
         </div>
         <div className="text-right">
-          <p className="type-label text-text-muted">Don Score</p>
+          <p className="type-label text-text-muted">Creator Impact</p>
           <data className="mt-2 block text-[15px] font-medium tabular-nums text-text-secondary">
             {creator.donScore}
           </data>
@@ -73,16 +73,16 @@ export function SignalFeedItem({
         </p>
 
         {signal.media ? (
-          <div className="mt-5 grid min-h-[142px] grid-cols-[1.15fr_0.85fr] items-end border border-border bg-[#080a08] p-6">
+          <div className="mt-5 grid min-h-[158px] grid-cols-1 items-end gap-7 rounded-[22px] border border-[#102317]/12 bg-[#dff5dc] p-7 text-[#102317] sm:grid-cols-[1.15fr_0.85fr] sm:gap-0">
             <div>
-              <p className="type-label text-text-muted">{signal.media.kicker}</p>
-              <p className="mt-7 text-[34px] font-bold uppercase leading-[0.92] tracking-[-0.045em] text-text-primary">
+              <p className="type-label text-[#102317]/52">{signal.media.kicker}</p>
+              <p className="mt-6 font-display text-[40px] leading-[0.92] tracking-[-0.05em] text-[#102317]">
                 {signal.media.headline}
               </p>
             </div>
-            <div className="border-l border-border pl-6">
-              <span className="mb-4 block h-px w-9 bg-lime" />
-              <p className="max-w-[220px] text-[12px] leading-5 text-text-secondary">
+            <div className="border-t border-[#102317]/15 pt-5 sm:border-l sm:border-t-0 sm:pl-7 sm:pt-0">
+              <span className="mb-4 block h-1 w-9 rounded-full bg-[#102317]" />
+              <p className="max-w-[240px] text-[13px] leading-5 text-[#102317]/68">
                 {signal.media.note}
               </p>
             </div>

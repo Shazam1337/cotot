@@ -6,7 +6,7 @@ import {
   type DemoCreator,
   type DemoSignal,
 } from "@/data/demo-scenario";
-import { DONS_X_URL } from "@/lib/constants";
+import { COTOT_X_URL } from "@/lib/constants";
 import { formatSol } from "@/lib/currency";
 
 type FeaturedSignalProps = {
@@ -56,7 +56,7 @@ export function FeaturedSignal({
         </div>
 
         <div className="text-right">
-          <p className="type-label text-text-muted">Don Score</p>
+          <p className="type-label text-text-muted">Creator Impact</p>
           <p className="mt-2 text-[17px] font-medium tabular-nums text-text-secondary">
             {creator.donScore}
           </p>
@@ -78,7 +78,7 @@ export function FeaturedSignal({
           className="mt-7 flex h-[250px] flex-col justify-between overflow-hidden border border-border bg-[#080a08] p-7"
         >
           <div className="flex items-center justify-between">
-            <p className="text-[14px] font-semibold tracking-[-0.02em] text-text-primary">DONS</p>
+            <p className="text-[14px] font-semibold tracking-[-0.02em] text-text-primary">COTOT</p>
             <p className="type-label text-text-muted">{signal.mediaKicker}</p>
           </div>
 
@@ -96,7 +96,7 @@ export function FeaturedSignal({
           </div>
 
           <p className="text-[10px] font-medium uppercase tracking-[0.14em] text-text-muted">
-            DONS / <span className="text-lime">Solana</span>
+            COTOT / <span className="text-lime">Solana</span>
           </p>
         </motion.div>
       </div>
@@ -210,7 +210,7 @@ export function FeaturedSignal({
           </p>
         </div>
         <a
-          href={DONS_X_URL}
+          href={COTOT_X_URL}
           target="_blank"
           rel="noopener noreferrer"
           className="cursor-pointer text-[12px] font-medium text-text-secondary transition-colors hover:text-text-primary focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-lime"

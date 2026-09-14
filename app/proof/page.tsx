@@ -3,8 +3,8 @@ import { SiteFooter } from "@/components/layout/site-footer";
 import { ProofPage } from "@/components/proof/proof-page";
 
 export const metadata: Metadata = {
-  title: "Proof — DONS",
-  description: "Protocol economics, creator settlements, and DONS network status.",
+  title: "Open Ledger — COTOT",
+  description: "Transparent protocol economics, creator settlements, and network status.",
 };
 
 export default function ProofRoute() {

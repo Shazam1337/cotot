@@ -4,30 +4,31 @@ import { Container } from "@/components/layout/container";
 import { HeaderNavigation } from "@/components/layout/header-navigation";
 import { LiveDot } from "@/components/ui/live-dot";
 import { WalletButton } from "@/components/wallet/wallet-button";
-import donsLogo from "@/public/assets/brand/ChatGPT Image 9 сент. 2026 г., 16_03_37.png";
-import { DONS_X_URL } from "@/lib/constants";
+import cototLogo from "@/public/assets/brand/ChatGPT Image 9 сент. 2026 г., 16_03_37.png";
+import { COTOT_X_URL } from "@/lib/constants";
 
 export function SiteHeader() {
   return (
-    <header className="relative z-20 h-[74px] border-b border-border bg-bg/40">
-      <Container className="grid h-full grid-cols-[160px_1fr_auto] items-center gap-6">
+    <header className="sticky top-0 z-30 h-[68px] border-b border-border bg-bg/88 backdrop-blur-xl">
+      <Container className="grid h-full grid-cols-[1fr_auto] items-center gap-5 md:grid-cols-[190px_1fr_auto]">
         <Link
           href="/"
-          aria-label="DONS home"
-          className="flex w-fit items-center"
+          aria-label="COTOT home"
+          className="flex w-fit items-center gap-3"
         >
           <Image
-            src={donsLogo}
-            alt="DONS"
+            src={cototLogo}
+            alt="COTOT"
             loading="eager"
-            className="h-8 w-auto object-contain"
+            className="size-[47px] rounded-[13px] object-cover"
           />
+          <span className="text-[34px] font-bold leading-none tracking-[-0.03em] text-text-primary">COTOT</span>
         </Link>
 
         <HeaderNavigation />
 
-        <div className="flex items-center justify-end gap-4">
-          <span className="type-label flex items-center gap-2 text-lime">
+        <div className="flex items-center justify-end gap-3">
+          <span className="type-label hidden items-center gap-2 text-[#23833c] lg:flex">
             <LiveDot />
             Live
           </span>
@@ -35,11 +36,11 @@ export function SiteHeader() {
           <WalletButton />
 
           <a
-            href={DONS_X_URL}
+            href={COTOT_X_URL}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Open DONS on X"
-            className="grid size-9 shrink-0 place-items-center text-text-secondary transition-colors duration-200 hover:text-lime focus-visible:text-lime focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-lime"
+            aria-label="Open COTOT on X"
+            className="hidden size-9 shrink-0 place-items-center text-text-secondary transition-colors duration-200 hover:text-text-primary focus-visible:text-text-primary focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-text-primary lg:grid"
           >
             <svg
               aria-hidden="true"

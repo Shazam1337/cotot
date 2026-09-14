@@ -1,6 +1,6 @@
-import { AttentionBecomesValue } from "@/components/home/attention-becomes-value";
 import { DonsTape } from "@/components/home/dons-tape";
 import { FoundationHero } from "@/components/home/foundation-hero";
+import { PlatformOverview } from "@/components/home/platform-overview";
 import { Proof } from "@/components/home/proof";
 import { TheWire } from "@/components/home/the-wire";
 import { TopDons } from "@/components/home/top-dons";
@@ -12,10 +12,14 @@ export default function Home() {
       <main>
         <FoundationHero />
         <DonsTape />
-        <TheWire />
-        <AttentionBecomesValue />
+        <PlatformOverview />
+        <div className="theme-dark">
+          <TheWire />
+        </div>
         <TopDons />
-        <Proof />
+        <div className="theme-dark">
+          <Proof />
+        </div>
       </main>
       <SiteFooter />
     </>

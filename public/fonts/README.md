@@ -1,4 +1,4 @@
-# DONS local fonts
+# COTOT local fonts
 
 The production fonts are loaded by `next/font/local` from their existing source
 folders under `components`:

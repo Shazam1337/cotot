@@ -33,7 +33,7 @@ function TapeGroup({ hidden = false }: { hidden?: boolean }) {
 export function DonsTape() {
   return (
     <section
-      aria-label="Live DONS activity"
+      aria-label="Live COTOT activity"
       className="dons-tape h-12 overflow-hidden border-y border-border bg-bg-elevated/88"
     >
       <div className="dons-tape-track">

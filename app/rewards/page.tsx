@@ -3,8 +3,8 @@ import { SiteFooter } from "@/components/layout/site-footer";
 import { RewardsPage } from "@/components/rewards/rewards-page";
 
 export const metadata: Metadata = {
-  title: "Your Cut — DONS",
-  description: "Personal creator rewards and DONS settlement history.",
+  title: "Rewards — COTOT",
+  description: "Creator rewards, eligible signals, and settlement history.",
 };
 
 export default function RewardsRoute() {

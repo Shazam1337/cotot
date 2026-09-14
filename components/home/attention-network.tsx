@@ -53,7 +53,7 @@ export function AttentionNetwork() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 1, delay: 0.18, ease: [0.22, 1, 0.36, 1] }}
       className="relative h-[600px] w-[clamp(680px,46vw,760px)]"
-      aria-label="Live DONS attention network and Creator Pool"
+      aria-label="Live COTOT attention network and Creator Pool"
     >
       <div
         aria-hidden="true"

@@ -100,23 +100,22 @@ export function Proof() {
   return (
     <section id="proof" aria-labelledby="proof-heading" className="border-b border-border">
       <Container className="pb-32 pt-[140px]">
-        <div className="grid grid-cols-12 items-end gap-8">
-          <div className="col-span-8">
+        <div className="grid grid-cols-1 items-end gap-8 lg:grid-cols-12">
+          <div className="lg:col-span-8">
             <p className="type-label flex items-center gap-3 text-text-muted">
               <span className="h-px w-9 bg-lime" />
-              Onchain transparency
+              Open economics
             </p>
             <h2 id="proof-heading" className="type-section-title mt-6 text-text-primary">
-              Proof
+              The open ledger.
             </h2>
             <p className="mt-7 text-[20px] leading-[1.38] tracking-[-0.015em] text-text-secondary">
-              <span className="block">Every cut.</span>
-              <span className="block">Every payout.</span>
-              <span className="block">Visible.</span>
+              <span className="block">Every cut and every payout,</span>
+              <span className="block">visible in one place.</span>
             </p>
           </div>
 
-          <div className="col-span-4 flex justify-end pb-1">
+          <div className="flex justify-start pb-1 lg:col-span-4 lg:justify-end">
             <div className="border-l border-border pl-5">
               <p className="text-[13px] font-medium text-text-secondary">Solana</p>
               <p className="type-label mt-3 flex items-center gap-2 text-lime">
@@ -127,7 +126,7 @@ export function Proof() {
           </div>
         </div>
 
-        <div className="mt-16 grid grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)] items-start gap-8">
+        <div className="mt-16 grid grid-cols-1 items-start gap-8 xl:grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)]">
           <div>
             <div className="grid grid-cols-2 border-y border-border">
               <div className="border-b border-r border-border py-8 pr-7">
@@ -261,7 +260,7 @@ export function Proof() {
             </div>
           </div>
 
-          <aside className="border border-border-strong bg-bg-elevated/48">
+          <aside className="overflow-x-auto border border-border-strong bg-bg-elevated/48">
             <div className="flex items-center justify-between border-b border-border px-6 py-6">
               <div>
                 <p className="type-label text-text-secondary">Live Settlements</p>
