@@ -8,7 +8,7 @@ export function Container({
 }: ContainerProps) {
   return (
     <div
-      className={`mx-auto w-full max-w-(--container) px-(--gutter) ${className}`}
+      className={`w-full px-(--gutter) ${className}`}
       {...props}
     />
   );

@@ -3,14 +3,14 @@ import { SiteFooter } from "@/components/layout/site-footer";
 import { WirePage } from "@/components/wire/wire-page";
 
 export const metadata: Metadata = {
-  title: "Live Signals — COTOT",
-  description: "Follow creator attention from detection to settlement.",
+  title: "Activity",
+  description: "Inspect ONIX public activity, attribution status, and contribution metrics.",
 };
 
 export default function WireRoute() {
   return (
     <>
-      <main>
+      <main className="product-page">
         <WirePage />
       </main>
       <SiteFooter />

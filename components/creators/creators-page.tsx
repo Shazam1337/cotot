@@ -27,10 +27,10 @@ type RankedCreator = {
 };
 
 const sortOptions: { id: CreatorSort; label: string }[] = [
-  { id: "don-score", label: "Creator Impact" },
+  { id: "don-score", label: "Contribution" },
   { id: "reach", label: "Reach" },
   { id: "earned", label: "Earned" },
-  { id: "signals", label: "Signals" },
+  { id: "signals", label: "Events" },
 ];
 
 const liveEvents: { creatorId: string; metric: LiveMetric; amount: number }[] = [
@@ -97,11 +97,11 @@ function TopCreator({
   const { creator, metrics, rank } = entry;
   const leader = rank === 1;
   const secondaryMetrics = [
-    { label: "Signals", value: metrics.signals.toString(), metric: "signals" as const },
+    { label: "Events", value: metrics.signals.toString(), metric: "signals" as const },
     { label: "Reach", value: formatReach(metrics.reach), metric: "reach" as const },
     { label: "Earned", value: formatSol(metrics.earned) },
-    { label: "Live Signals", value: metrics.liveSignals.toString() },
-    { label: "Avg Impact", value: metrics.avgImpact.toString() },
+    { label: "Active events", value: metrics.liveSignals.toString() },
+    { label: "Avg contribution", value: metrics.avgImpact.toString() },
     { label: "Momentum", value: `+${metrics.momentum.toFixed(1)}%`, metric: "momentum" as const },
   ];
 
@@ -128,7 +128,7 @@ function TopCreator({
         </div>
 
         <div className={leader ? "mt-12" : "mt-14"}>
-          <p className="type-label text-text-muted">Creator Impact</p>
+          <p className="type-label text-text-muted">Contribution score</p>
           <data
             value={metrics.donScore}
             className={`${leader ? "text-[92px] text-lime" : "text-[66px] text-text-primary"} mt-4 block font-medium leading-none tracking-[-0.06em] tabular-nums`}
@@ -225,10 +225,10 @@ function RankingHeader() {
     <div className="grid grid-cols-[70px_minmax(190px,1.55fr)_0.82fr_0.7fr_0.8fr_0.82fr_0.82fr_0.8fr] gap-5 border-y border-border px-3 py-4 text-[9px] font-semibold uppercase tracking-[0.11em] text-text-muted">
       <span>Rank</span>
       <span>Creator</span>
-      <span>Creator Impact</span>
-      <span>Signals</span>
+      <span>Contribution</span>
+      <span>Events</span>
       <span>Reach</span>
-      <span>Avg Impact</span>
+      <span>Avg contribution</span>
       <span>Earned</span>
       <span>Momentum</span>
     </div>
@@ -334,22 +334,22 @@ export function CreatorsPage() {
           <div className="lg:col-span-8">
             <p className="type-label flex items-center gap-3 text-text-muted">
               <span className="h-px w-9 bg-lime" />
-              Network intelligence
+              Contributor analytics / Demo
             </p>
             <h1 id="creators-page-heading" className="type-section-title mt-6 text-text-primary">
-              Creator Index
+              Contributors
             </h1>
             <p className="mt-7 text-[20px] leading-[1.38] tracking-[-0.015em] text-text-secondary">
-              The people moving attention through COTOT.
+              Compare the people driving measurable network activity.
             </p>
           </div>
 
           <div className="flex justify-start pb-1 lg:col-span-4 lg:justify-end">
             <div className="min-w-[190px] border-l border-border pl-5">
-              <p className="type-label flex items-center gap-2 text-lime"><LiveDot /> Live</p>
+              <p className="type-label flex items-center gap-2 text-lime"><LiveDot /> Scenario data</p>
               <p className="mt-3 text-[12px] text-text-secondary">148 creators rewarded</p>
               <p className="mt-1.5 text-[12px] text-text-secondary">24 active now</p>
-              <p className="mt-2 font-mono text-[9px] uppercase tracking-[0.1em] text-text-muted">Updated just now</p>
+              <p className="mt-2 font-mono text-[9px] uppercase tracking-[0.1em] text-text-muted">Interactive prototype</p>
             </div>
           </div>
         </div>
@@ -384,7 +384,7 @@ export function CreatorsPage() {
             />
           </label>
 
-          <div className="flex items-center justify-end gap-4" role="group" aria-label="Sort creators">
+          <div className="creator-sorts flex items-center justify-end gap-4" role="group" aria-label="Sort contributors">
             <span className="type-label mr-1 text-text-muted">Sort</span>
             {sortOptions.map((option) => (
               <button
@@ -433,15 +433,15 @@ export function CreatorsPage() {
               exit={{ opacity: 0.72 }}
               transition={{ duration: reduceMotion ? 0 : 0.3 }}
             >
-              <div className="mt-14 grid grid-cols-[1.38fr_1fr_1fr] border-y border-border bg-bg-elevated/20">
+              <div className="creator-top-grid mt-14 grid grid-cols-[1.38fr_1fr_1fr] border-y border-border bg-bg-elevated/20">
                 {topThree.map((entry) => <TopCreator key={entry.creator.id} entry={entry} range={range} highlight={highlight} />)}
               </div>
 
-              <section className="mt-20" aria-labelledby="rising-dons-heading">
+              <section className="mt-20" aria-labelledby="rising-contributors-heading">
                 <div className="flex items-end justify-between">
                   <div>
                     <p className="type-label text-text-muted">Recent momentum</p>
-                    <h2 id="rising-dons-heading" className="mt-4 text-[28px] font-semibold tracking-[-0.035em] text-text-primary">Rising Creators</h2>
+                    <h2 id="rising-contributors-heading" className="mt-4 text-[28px] font-semibold tracking-[-0.035em] text-text-primary">Rising contributors</h2>
                   </div>
                   <p className="text-[11px] text-text-muted">Movement this week</p>
                 </div>
@@ -463,9 +463,9 @@ export function CreatorsPage() {
                 <dl className="mt-5 grid grid-cols-5 border-y border-border py-6">
                   {[
                     ["Active Creators", summary.activeCreators.toString()],
-                    ["Total Signals", summary.totalSignals.toLocaleString("en-US")],
+                    ["Total events", summary.totalSignals.toLocaleString("en-US")],
                     ["Total Reach", formatReach(summary.totalReach)],
-                    ["Avg Creator Impact", summary.avgDonScore.toString()],
+                    ["Avg contribution", summary.avgDonScore.toString()],
                     ["Creators Rewarded", summary.creatorsRewarded.toString()],
                   ].map(([label, value], index) => (
                     <div key={label} className={`${index ? "border-l border-border pl-7" : ""}`}><dd className="text-[30px] font-medium tracking-[-0.045em] tabular-nums text-text-primary">{value}</dd><dt className="mt-3 text-[10px] text-text-muted">{label}</dt></div>
@@ -474,7 +474,7 @@ export function CreatorsPage() {
               </section>
 
               <section className="mt-20" aria-labelledby="creator-ranking-heading">
-                <div className="mb-7 flex items-end justify-between"><div><p className="type-label text-text-muted">Reputation layer</p><h2 id="creator-ranking-heading" className="mt-4 text-[28px] font-semibold tracking-[-0.035em] text-text-primary">Network Ranking</h2></div><p className="text-[11px] text-text-muted">Ranks #04–#15</p></div>
+                <div className="mb-7 flex items-end justify-between"><div><p className="type-label text-text-muted">Performance layer</p><h2 id="creator-ranking-heading" className="mt-4 text-[28px] font-semibold tracking-[-0.035em] text-text-primary">Contribution ranking</h2></div><p className="text-[11px] text-text-muted">Ranks #04–#15</p></div>
                 <RankingHeader />
                 <CreatorRows entries={lowerRanks} range={range} highlight={highlight} />
               </section>

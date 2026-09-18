@@ -112,8 +112,8 @@ export function ProofPage() {
             {
               id: `pool_activity_${eventIndex}`,
               timestamp: formatLocalTime(new Date()),
-              event: "Creator Pool",
-              detail: "Fee allocation received",
+              event: "Allocation pool",
+              detail: "Modeled fee allocation",
               amount: `+${formatSol(increment)}`,
             },
             ...current,
@@ -152,7 +152,7 @@ export function ProofPage() {
           {
             id: `settlement_activity_${sequence}`,
             timestamp,
-            event: `Settlement ${settlement.settlementId} completed`,
+            event: `Record ${settlement.settlementId} completed`,
             detail: settlement.creator,
             amount: formatSol(settlement.amount),
           },
@@ -183,43 +183,43 @@ export function ProofPage() {
           <div className="lg:col-span-8">
             <p className="type-label flex items-center gap-3 text-text-muted">
               <span className="h-px w-9 bg-lime" />
-              Open economics
+              Distribution records / Demo
             </p>
             <h1 id="proof-page-heading" className="type-section-title mt-6 text-text-primary">
-              Open Ledger
+              Records
             </h1>
             <p className="mt-7 text-[20px] leading-[1.38] tracking-[-0.015em] text-text-secondary">
-              <span className="block">Every cut.</span>
-              <span className="block">Every payout.</span>
-              <span className="block">Visible.</span>
+              <span className="block">Every cycle.</span>
+              <span className="block">Every allocation.</span>
+              <span className="block">Traceable.</span>
             </p>
           </div>
           <div className="flex justify-start pb-1 lg:col-span-4 lg:justify-end">
             <dl className="min-w-[210px] border-l border-border pl-5">
               <div>
-                <dt className="type-label text-text-muted">Solana</dt>
-                <dd className="type-label mt-3 flex items-center gap-2 text-lime"><LiveDot /> Live</dd>
+                <dt className="type-label text-text-muted">Wallet network</dt>
+                <dd className="type-label mt-3 flex items-center gap-2 text-lime"><LiveDot /> Mainnet target</dd>
               </div>
               <div className="mt-5">
-                <dt className="type-label text-text-muted">Network Status</dt>
-                <dd className="mt-2.5 text-[12px] font-medium text-text-primary">Operational</dd>
+                <dt className="type-label text-text-muted">Scenario status</dt>
+                <dd className="mt-2.5 text-[12px] font-medium text-text-primary">Prototype</dd>
               </div>
             </dl>
           </div>
         </div>
 
-        <section className="mt-16 border-y border-border" aria-labelledby="protocol-snapshot-heading">
-          <h2 id="protocol-snapshot-heading" className="sr-only">Protocol Snapshot</h2>
-          <div className="grid grid-cols-[1.18fr_1.18fr_0.92fr] border-b border-border">
+        <section className="onik-panel mt-16" aria-labelledby="protocol-snapshot-heading">
+          <h2 id="protocol-snapshot-heading" className="sr-only">Distribution snapshot</h2>
+          <div className="proof-metrics-grid grid grid-cols-[1.18fr_1.18fr_0.92fr] border-b border-border">
             <div className="min-h-[190px] border-r border-border px-8 py-8">
-              <p className="type-label text-text-muted">Fees Captured</p>
+              <p className="type-label text-text-muted">Fees modeled</p>
               <data value={feesCaptured} className="mt-6 block text-[58px] font-medium leading-none tracking-[-0.055em] tabular-nums text-text-primary">
                 <MetricValue active={highlightedMetric === "fees"}>{formatSol(feesCaptured)}</MetricValue>
               </data>
               <p className="mt-5 text-[10px] text-text-muted">Protocol trading activity</p>
             </div>
             <div className="min-h-[190px] border-r border-border px-8 py-8">
-              <p className="type-label text-text-muted">Creator Pool</p>
+              <p className="type-label text-text-muted">Allocation pool</p>
               <data value={creatorPool} className="mt-6 block text-[58px] font-medium leading-none tracking-[-0.055em] tabular-nums text-lime">
                 <MetricValue active={highlightedMetric === "pool"}>{formatSol(creatorPool)}</MetricValue>
               </data>
@@ -230,23 +230,23 @@ export function ProofPage() {
               <data value={distributed} className="mt-6 block text-[42px] font-medium leading-none tracking-[-0.05em] tabular-nums text-text-primary">
                 <MetricValue active={highlightedMetric === "distributed"}>{formatSol(distributed)}</MetricValue>
               </data>
-              <p className="mt-6 type-label flex items-center gap-2 text-lime"><LiveDot /> Settlements live</p>
+              <p className="mt-6 type-label flex items-center gap-2 text-lime"><LiveDot /> Scenario updating</p>
             </div>
           </div>
           <dl className="grid grid-cols-3 py-6">
-            <div className="px-8"><dt className="type-label text-text-muted">Creators Paid</dt><dd className="mt-3 text-[27px] font-medium tabular-nums text-text-primary"><MetricValue active={highlightedMetric === "creators"}>{creatorsPaid}</MetricValue></dd></div>
-            <div className="border-l border-border px-8"><dt className="type-label text-text-muted">Cuts Completed</dt><dd className="mt-3 text-[27px] font-medium tabular-nums text-text-primary">{proofMetrics.cutsCompleted}</dd></div>
-            <div className="border-l border-border px-8"><dt className="type-label text-text-muted">Current Cut</dt><dd className="mt-3 font-mono text-[25px] text-text-primary">{currentProofCut.id}</dd></div>
+            <div className="px-8"><dt className="type-label text-text-muted">Contributors paid</dt><dd className="mt-3 text-[27px] font-medium tabular-nums text-text-primary"><MetricValue active={highlightedMetric === "creators"}>{creatorsPaid}</MetricValue></dd></div>
+            <div className="border-l border-border px-8"><dt className="type-label text-text-muted">Cycles completed</dt><dd className="mt-3 text-[27px] font-medium tabular-nums text-text-primary">{proofMetrics.cutsCompleted}</dd></div>
+            <div className="border-l border-border px-8"><dt className="type-label text-text-muted">Current cycle</dt><dd className="mt-3 font-mono text-[25px] text-text-primary">{currentProofCut.id}</dd></div>
           </dl>
         </section>
 
         <section className="mt-24" aria-labelledby="value-flow-heading">
           <div className="grid grid-cols-12 items-end gap-8">
-            <div className="col-span-7"><p className="type-label text-text-muted">Protocol economics</p><h2 id="value-flow-heading" className="mt-4 text-[32px] font-semibold tracking-[-0.04em] text-text-primary">Value Flow</h2></div>
-            <p className="col-span-5 text-[12px] leading-5 text-text-secondary">A fixed share of protocol trading fees is routed into the Creator Pool and distributed through Cuts.</p>
+            <div className="col-span-7"><p className="type-label text-text-muted">Distribution model</p><h2 id="value-flow-heading" className="mt-4 text-[32px] font-semibold tracking-[-0.04em] text-text-primary">Allocation flow</h2></div>
+            <p className="col-span-5 text-[12px] leading-5 text-text-secondary">This scenario models a fixed allocation from trading fees into a contributor pool, then distributes it by cycle.</p>
           </div>
           <div className="mt-8 grid grid-cols-5 border-y border-border">
-            {["Trading", "Protocol Fees", "Creator Pool", "Cut", "Creators"].map((stage, index) => (
+            {["Trading", "Modeled fees", "Allocation pool", "Cycle", "Contributors"].map((stage, index) => (
               <div key={stage} className={`relative min-h-[104px] px-6 py-6 ${index ? "border-l border-border" : ""}`}><p className="font-mono text-[9px] text-text-muted">0{index + 1}</p><p className={`mt-5 text-[12px] font-semibold uppercase tracking-[0.08em] ${index >= 2 ? "text-lime" : "text-text-primary"}`}>{stage}</p>{index < 4 ? <span aria-hidden="true" className="absolute -right-2.5 top-1/2 z-10 bg-bg px-1.5 text-[12px] text-text-muted">→</span> : null}</div>
             ))}
           </div>
@@ -256,24 +256,24 @@ export function ProofPage() {
                 ["Trade Volume", formatSol(proofValueFlow.tradeVolume)],
                 ["Fees Generated", formatSol(proofValueFlow.feesGenerated)],
                 ["Creator Allocation", formatSol(proofValueFlow.creatorAllocation)],
-                ["Current Cut", proofValueFlow.currentCut],
-              ].map(([label, value], index) => <div key={label} className={index ? "border-l border-border pl-6" : ""}><dd className={`${label === "Current Cut" ? "font-mono" : ""} text-[20px] font-medium tabular-nums text-text-primary`}>{value}</dd><dt className="mt-3 text-[9px] uppercase tracking-[0.09em] text-text-muted">{label}</dt></div>)}
+                ["Current cycle", proofValueFlow.currentCut],
+              ].map(([label, value], index) => <div key={label} className={index ? "border-l border-border pl-6" : ""}><dd className={`${label === "Current cycle" ? "font-mono" : ""} text-[20px] font-medium tabular-nums text-text-primary`}>{value}</dd><dt className="mt-3 text-[9px] uppercase tracking-[0.09em] text-text-muted">{label}</dt></div>)}
             </dl>
-            <div className="border-y border-border py-6"><div className="flex items-end justify-between"><div><p className="text-[25px] font-medium tabular-nums">{proofValueFlow.treasuryPercent}%</p><p className="mt-2 text-[10px] text-text-muted">Protocol / Treasury</p></div><div className="text-right"><p className="text-[25px] font-medium tabular-nums text-lime">{proofValueFlow.creatorPercent}%</p><p className="mt-2 text-[10px] text-text-muted">Creator Pool</p></div></div><div className="mt-5 flex h-1.5 overflow-hidden bg-white/[0.07]"><span className="bg-text-muted/70" style={{ width: `${proofValueFlow.treasuryPercent}%` }} /><span className="bg-lime" style={{ width: `${proofValueFlow.creatorPercent}%` }} /></div></div>
+            <div className="border-y border-border py-6"><div className="flex items-end justify-between"><div><p className="text-[25px] font-medium tabular-nums">{proofValueFlow.treasuryPercent}%</p><p className="mt-2 text-[10px] text-text-muted">Protocol / Treasury</p></div><div className="text-right"><p className="text-[25px] font-medium tabular-nums text-lime">{proofValueFlow.creatorPercent}%</p><p className="mt-2 text-[10px] text-text-muted">Allocation pool</p></div></div><div className="mt-5 flex h-1.5 overflow-hidden bg-white/[0.07]"><span className="bg-text-muted/70" style={{ width: `${proofValueFlow.treasuryPercent}%` }} /><span className="bg-lime" style={{ width: `${proofValueFlow.creatorPercent}%` }} /></div></div>
           </div>
         </section>
 
         <section className="mt-24 border-y border-border py-8" aria-labelledby="current-proof-cut-heading">
-          <div className="flex items-center justify-between"><div><p className="type-label text-text-muted">Distribution cycle</p><h2 id="current-proof-cut-heading" className="mt-4 text-[32px] font-semibold tracking-[-0.04em]">Current Cut</h2></div><p className="type-label flex items-center gap-2 text-lime"><LiveDot /> {currentProofCut.status}</p></div>
+          <div className="flex items-center justify-between"><div><p className="type-label text-text-muted">Scenario cycle</p><h2 id="current-proof-cut-heading" className="mt-4 text-[32px] font-semibold tracking-[-0.04em]">Current cycle</h2></div><p className="type-label flex items-center gap-2 text-lime"><LiveDot /> {currentProofCut.status}</p></div>
           <dl className="mt-8 grid grid-cols-[1fr_1fr_1fr_1.15fr_1fr_0.8fr_0.8fr] divide-x divide-border border-y border-border py-6">
             {[
-              ["Cut", currentProofCut.id, true],
+              ["Cycle", currentProofCut.id, true],
               ["Status", currentProofCut.status],
               ["Started", currentProofCut.started, true],
               ["Next Distribution", formatCountdown(secondsRemaining), true],
-              ["Creator Pool", formatSol(creatorPool)],
-              ["Eligible Signals", currentProofCut.eligibleSignals.toString()],
-              ["Eligible Creators", currentProofCut.eligibleCreators.toString()],
+              ["Allocation pool", formatSol(creatorPool)],
+              ["Eligible events", currentProofCut.eligibleSignals.toString()],
+              ["Contributors", currentProofCut.eligibleCreators.toString()],
             ].map(([label, value, mono], index) => <div key={label as string} className={index ? "px-5" : "pr-5"}><dt className="type-label text-text-muted">{label}</dt><dd className={`${mono ? "font-mono" : ""} mt-3 text-[14px] font-medium tabular-nums text-text-primary`}>{value}</dd></div>)}
           </dl>
           <div className="mt-8 grid grid-cols-5">
@@ -282,34 +282,34 @@ export function ProofPage() {
         </section>
 
         <section className="mt-24" aria-labelledby="live-settlements-heading">
-          <div className="mb-8 flex items-end justify-between"><div><p className="type-label text-text-muted">Protocol activity</p><h2 id="live-settlements-heading" className="mt-4 text-[32px] font-semibold tracking-[-0.04em]">Live Settlements</h2></div><p className="type-label flex items-center gap-2 text-lime"><LiveDot /> 8 visible</p></div>
+          <div className="mb-8 flex items-end justify-between"><div><p className="type-label text-text-muted">Protocol activity</p><h2 id="live-settlements-heading" className="mt-4 text-[32px] font-semibold tracking-[-0.04em]">Simulated distributions</h2></div><p className="type-label flex items-center gap-2 text-lime"><LiveDot /> 8 visible</p></div>
           <div className="border border-border bg-bg-elevated/22">
-            <div className="grid grid-cols-[1.35fr_0.8fr_0.7fr_0.9fr_1.2fr_0.85fr_0.8fr] gap-5 border-b border-border px-6 py-4 text-[9px] font-semibold uppercase tracking-[0.11em] text-text-muted"><span>Creator</span><span>Amount</span><span>Cut</span><span>Settlement ID</span><span>Mock Hash</span><span>Time</span><span>Status</span></div>
+            <div className="grid grid-cols-[1.35fr_0.8fr_0.7fr_0.9fr_1.2fr_0.85fr_0.8fr] gap-5 border-b border-border px-6 py-4 text-[9px] font-semibold uppercase tracking-[0.11em] text-text-muted"><span>Contributor</span><span>Amount</span><span>Cycle</span><span>Record ID</span><span>Mock Hash</span><span>Time</span><span>Status</span></div>
             <ol aria-live="polite">
               {settlements.map((settlement) => (
                 <motion.li key={settlement.id} initial={reduceMotion ? false : { opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: reduceMotion ? 0 : 0.3, ease: [0.22, 1, 0.36, 1] }} className="grid min-h-[66px] grid-cols-[1.35fr_0.8fr_0.7fr_0.9fr_1.2fr_0.85fr_0.8fr] items-center gap-5 border-b border-border px-6 last:border-b-0"><span className="text-[13px] font-semibold text-text-primary">{settlement.creator}</span><span className="text-[14px] font-medium tabular-nums text-lime">{formatSol(settlement.amount)}</span><span className="font-mono text-[10px] text-text-muted">{settlement.cut}</span><span className="font-mono text-[10px] text-text-primary">{settlement.settlementId}</span><span title="Mock transaction signature · local record" className="font-mono text-[9px] text-text-muted">{settlement.mockHash}</span><time className="font-mono text-[9px] text-text-muted">{settlement.timestamp}</time><span className="text-[9px] font-semibold uppercase tracking-[0.1em] text-lime">{settlement.status}</span></motion.li>
               ))}
             </ol>
           </div>
-          <p className="mt-4 font-mono text-[8px] uppercase tracking-[0.1em] text-text-muted">Mock settlements and hashes · not onchain records</p>
+          <p className="mt-4 font-mono text-[8px] uppercase tracking-[0.1em] text-text-muted">Simulated distributions and hashes · not onchain records</p>
         </section>
 
         <section className="mt-24" aria-labelledby="cut-history-heading">
-          <div className="mb-8 flex items-end justify-between"><div><p className="type-label text-text-muted">Completed distributions</p><h2 id="cut-history-heading" className="mt-4 text-[32px] font-semibold tracking-[-0.04em]">Cut History</h2></div><p className="font-mono text-[9px] uppercase tracking-[0.1em] text-text-muted">8 previous Cuts</p></div>
-          <div className="grid grid-cols-[0.8fr_1fr_1fr_1fr_0.8fr_0.8fr_0.8fr] border-y border-border px-4 py-4 text-[9px] font-semibold uppercase tracking-[0.11em] text-text-muted"><span>Cut</span><span>Date</span><span>Pool</span><span>Distributed</span><span>Creators</span><span>Signals</span><span>Status</span></div>
+          <div className="mb-8 flex items-end justify-between"><div><p className="type-label text-text-muted">Completed distributions</p><h2 id="cut-history-heading" className="mt-4 text-[32px] font-semibold tracking-[-0.04em]">Cycle history</h2></div><p className="font-mono text-[9px] uppercase tracking-[0.1em] text-text-muted">8 previous cycles</p></div>
+          <div className="grid grid-cols-[0.8fr_1fr_1fr_1fr_0.8fr_0.8fr_0.8fr] border-y border-border px-4 py-4 text-[9px] font-semibold uppercase tracking-[0.11em] text-text-muted"><span>Cycle</span><span>Date</span><span>Pool</span><span>Distributed</span><span>People</span><span>Events</span><span>Status</span></div>
           <ol>{cutHistory.map((cut) => <li key={cut.id} className="grid min-h-[68px] grid-cols-[0.8fr_1fr_1fr_1fr_0.8fr_0.8fr_0.8fr] items-center border-b border-border px-4 transition-colors duration-200 hover:bg-white/[0.018]"><span className="font-mono text-[11px] text-text-primary">{cut.id}</span><span className="text-[12px] text-text-secondary">{cut.date}</span><span className="text-[13px] font-medium tabular-nums">{formatSol(cut.pool)}</span><span className="text-[13px] font-medium tabular-nums">{formatSol(cut.distributed)}</span><span className="text-[12px] tabular-nums text-text-secondary">{cut.creators}</span><span className="text-[12px] tabular-nums text-text-secondary">{cut.signals}</span><span className="text-[9px] font-semibold uppercase tracking-[0.1em] text-lime">{cut.status}</span></li>)}</ol>
         </section>
 
         <section className="mt-24" aria-labelledby="infrastructure-heading">
           <div className="grid grid-cols-12 gap-14">
-            <div className="col-span-7"><p className="type-label text-text-muted">Protocol layer</p><h2 id="infrastructure-heading" className="mt-4 text-[32px] font-semibold tracking-[-0.04em]">Network & Infrastructure</h2><dl className="mt-8 grid grid-cols-2 border-y border-border">{infrastructureDetails.map((item, index) => <div key={item.label} className={`min-h-[90px] px-6 py-5 ${index % 2 ? "border-l border-border" : ""} ${index < 4 ? "border-b border-border" : ""}`}><dt className="type-label text-text-muted">{item.label}</dt><dd className={`${item.label === "Cluster" ? "font-mono" : ""} mt-3 text-[14px] font-medium text-text-primary`}>{item.value}{!item.real ? <span className="ml-2 text-[8px] uppercase tracking-[0.09em] text-text-muted">Mock status</span> : null}</dd></div>)}</dl><a href={solanaMainnet.explorerUrl} target="_blank" rel="noopener noreferrer" className="mt-6 inline-flex items-center gap-2 text-[12px] font-medium text-text-secondary transition-colors duration-200 hover:text-lime">Open Solana Explorer <ArrowUpRight aria-hidden="true" className="size-3.5" /></a></div>
-            <div className="col-span-5"><p className="type-label text-text-muted">Deployment state</p><h2 className="mt-4 text-[32px] font-semibold tracking-[-0.04em]">Protocol Programs</h2><dl className="mt-8 border-y border-border">{protocolPrograms.map((program) => <div key={program.label} className="flex min-h-[90px] items-center justify-between border-b border-border px-5 last:border-b-0"><div><dt className="text-[13px] font-semibold text-text-primary">{program.label}</dt><dd className="mt-1.5 text-[10px] text-text-muted">{program.stage}</dd></div><span className="font-mono text-[9px] uppercase tracking-[0.1em] text-text-secondary">{program.deployment}</span></div>)}</dl><p className="mt-5 text-[10px] leading-4 text-text-muted">Protocol financial activity on this page is a deterministic prototype scenario.</p></div>
+            <div className="col-span-7"><p className="type-label text-text-muted">Protocol layer</p><h2 id="infrastructure-heading" className="mt-4 text-[32px] font-semibold tracking-[-0.04em]">Network context</h2><dl className="mt-8 grid grid-cols-2 border-y border-border">{infrastructureDetails.map((item, index) => <div key={item.label} className={`min-h-[90px] px-6 py-5 ${index % 2 ? "border-l border-border" : ""} ${index < 4 ? "border-b border-border" : ""}`}><dt className="type-label text-text-muted">{item.label}</dt><dd className={`${item.label === "Cluster" ? "font-mono" : ""} mt-3 text-[14px] font-medium text-text-primary`}>{item.value}{!item.real ? <span className="ml-2 text-[8px] uppercase tracking-[0.09em] text-text-muted">Mock status</span> : null}</dd></div>)}</dl><a href={solanaMainnet.explorerUrl} target="_blank" rel="noopener noreferrer" className="mt-6 inline-flex items-center gap-2 text-[12px] font-medium text-text-secondary transition-colors duration-200 hover:text-lime">Open Solana Explorer <ArrowUpRight aria-hidden="true" className="size-3.5" /></a></div>
+            <div className="col-span-5"><p className="type-label text-text-muted">ONIX runtime</p><h2 className="mt-4 text-[32px] font-semibold tracking-[-0.04em]">Deployment state</h2><dl className="mt-8 border-y border-border">{protocolPrograms.map((program) => <div key={program.label} className="flex min-h-[90px] items-center justify-between border-b border-border px-5 last:border-b-0"><div><dt className="text-[13px] font-semibold text-text-primary">{program.label}</dt><dd className="mt-1.5 text-[10px] text-text-muted">{program.stage}</dd></div><span className="font-mono text-[9px] uppercase tracking-[0.1em] text-text-secondary">{program.deployment}</span></div>)}</dl><p className="mt-5 text-[10px] leading-4 text-text-muted">Financial activity on this page is a deterministic prototype scenario. No ONIX program is deployed.</p></div>
           </div>
         </section>
 
         <div className="mt-24 grid grid-cols-[0.82fr_1.18fr] gap-16">
-          <section aria-labelledby="system-status-heading"><p className="type-label text-text-muted">Runtime overview</p><h2 id="system-status-heading" className="mt-4 text-[30px] font-semibold tracking-[-0.04em]">System Status</h2><dl className="mt-7 border-y border-border">{systemStatuses.map((system) => <div key={system.label} className="flex min-h-[58px] items-center justify-between border-b border-border px-3 last:border-b-0"><dt className="text-[12px] text-text-secondary">{system.label}</dt><dd className="flex items-center gap-2 text-[9px] font-semibold uppercase tracking-[0.1em] text-lime"><span className="size-1 rounded-full bg-lime" />{system.status}{system.mocked ? <span className="text-text-muted">· Mock</span> : null}</dd></div>)}</dl></section>
-          <section aria-labelledby="protocol-activity-heading"><div className="flex items-end justify-between"><div><p className="type-label text-text-muted">Recent events</p><h2 id="protocol-activity-heading" className="mt-4 text-[30px] font-semibold tracking-[-0.04em]">Protocol Activity</h2></div><LiveDot /></div><ol className="mt-7 border-y border-border" aria-live="polite">{activity.map((item) => <li key={item.id} className="grid min-h-[58px] grid-cols-[90px_1fr_1fr_auto] items-center gap-5 border-b border-border px-3 last:border-b-0"><time className="font-mono text-[9px] text-text-muted">{item.timestamp}</time><span className="text-[12px] font-medium text-text-primary">{item.event}</span><span className="text-[10px] text-text-muted">{item.detail}</span><span className="text-[11px] font-medium tabular-nums text-lime">{item.amount}</span></li>)}</ol></section>
+          <section aria-labelledby="system-status-heading"><p className="type-label text-text-muted">Runtime overview</p><h2 id="system-status-heading" className="mt-4 text-[30px] font-semibold tracking-[-0.04em]">Prototype status</h2><dl className="mt-7 border-y border-border">{systemStatuses.map((system) => <div key={system.label} className="flex min-h-[58px] items-center justify-between border-b border-border px-3 last:border-b-0"><dt className="text-[12px] text-text-secondary">{system.label}</dt><dd className="flex items-center gap-2 text-[9px] font-semibold uppercase tracking-[0.1em] text-lime"><span className="size-1 rounded-full bg-lime" />{system.status}{system.mocked ? <span className="text-text-muted">· Mock</span> : null}</dd></div>)}</dl></section>
+          <section aria-labelledby="protocol-activity-heading"><div className="flex items-end justify-between"><div><p className="type-label text-text-muted">Recent events</p><h2 id="protocol-activity-heading" className="mt-4 text-[30px] font-semibold tracking-[-0.04em]">Scenario activity</h2></div><LiveDot /></div><ol className="mt-7 border-y border-border" aria-live="polite">{activity.map((item) => <li key={item.id} className="grid min-h-[58px] grid-cols-[90px_1fr_1fr_auto] items-center gap-5 border-b border-border px-3 last:border-b-0"><time className="font-mono text-[9px] text-text-muted">{item.timestamp}</time><span className="text-[12px] font-medium text-text-primary">{item.event}</span><span className="text-[10px] text-text-muted">{item.detail}</span><span className="text-[11px] font-medium tabular-nums text-lime">{item.amount}</span></li>)}</ol></section>
         </div>
       </Container>
     </section>

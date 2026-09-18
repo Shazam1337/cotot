@@ -3,14 +3,14 @@ import { CreatorsPage } from "@/components/creators/creators-page";
 import { SiteFooter } from "@/components/layout/site-footer";
 
 export const metadata: Metadata = {
-  title: "Creator Index — COTOT",
-  description: "Discover the creators generating measurable network value.",
+  title: "Contributors",
+  description: "Compare ONIX contributors by reach, activity, earnings, and contribution.",
 };
 
 export default function CreatorsRoute() {
   return (
     <>
-      <main>
+      <main className="product-page">
         <CreatorsPage />
       </main>
       <SiteFooter />

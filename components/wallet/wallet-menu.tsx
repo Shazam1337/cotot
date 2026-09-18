@@ -61,9 +61,9 @@ export function WalletMenu({ address, onClose }: WalletMenuProps) {
       </div>
 
       <div className="border-b border-border px-5 py-4">
-        <p className="type-label text-text-muted">Network</p>
+        <p className="type-label text-text-muted">Wallet type</p>
         <div className="mt-3 flex items-center justify-between">
-          <span className="text-[13px] font-medium text-text-primary">Solana Mainnet</span>
+          <span className="text-[13px] font-medium text-text-primary">Solana compatible</span>
           <span className="type-label flex items-center gap-2 text-lime">
             <LiveDot /> Connected
           </span>

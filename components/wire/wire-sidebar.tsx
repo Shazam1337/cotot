@@ -5,16 +5,16 @@ import { LiveDot } from "@/components/ui/live-dot";
 import { nextCutDurationSeconds } from "@/data/proof";
 
 const networkPulse = [
-  { label: "Signals / hour", value: "42" },
-  { label: "Creators live", value: "18" },
+  { label: "Events / hour", value: "42" },
+  { label: "Active contributors", value: "18" },
   { label: "Reach / hour", value: "184K" },
-  { label: "Avg. Impact", value: "684" },
+  { label: "Avg. contribution", value: "684" },
 ];
 
 const trendingCreators = [
-  { handle: "@mira_eth", detail: "Impact +18%" },
+  { handle: "@mira_eth", detail: "Contribution +18%" },
   { handle: "@julian0x", detail: "Reach +14%" },
-  { handle: "@noraonchain", detail: "6 live signals" },
+  { handle: "@noraonchain", detail: "6 tracked events" },
   { handle: "@0xharvey", detail: "0.0821 SOL estimated" },
 ];
 
@@ -40,11 +40,11 @@ export function WireSidebar() {
   }, []);
 
   return (
-    <aside className="sticky top-6 space-y-10" aria-label="Wire network context">
+    <aside className="sticky top-6 space-y-4" aria-label="Activity context">
       <section className="border-y border-border py-6" aria-labelledby="network-pulse-heading">
         <div className="flex items-center justify-between">
           <h2 id="network-pulse-heading" className="type-label text-text-secondary">
-            Network Pulse
+            Scenario metrics
           </h2>
           <LiveDot />
         </div>
@@ -65,7 +65,7 @@ export function WireSidebar() {
 
       <section className="border-b border-border pb-6" aria-labelledby="trending-heading">
         <h2 id="trending-heading" className="type-label text-text-secondary">
-          Trending Now
+          Contributor movement
         </h2>
         <ol className="mt-5">
           {trendingCreators.map((creator, index) => (
@@ -88,7 +88,7 @@ export function WireSidebar() {
       <section className="border-b border-border pb-7" aria-labelledby="current-cut-heading">
         <div className="flex items-center justify-between">
           <h2 id="current-cut-heading" className="type-label text-text-secondary">
-            Current Cut
+            Current cycle
           </h2>
           <p className="type-label flex items-center gap-2 text-lime">
             <LiveDot /> Accumulating
@@ -97,13 +97,13 @@ export function WireSidebar() {
         <p className="mt-6 font-mono text-[27px] text-text-primary">#0043</p>
         <dl className="mt-6 grid grid-cols-2 border-t border-border pt-5">
           <div className="border-r border-border pr-5">
-            <dt className="type-label text-text-muted">Next Cut</dt>
+            <dt className="type-label text-text-muted">Next cycle</dt>
             <dd className="mt-3 font-mono text-[17px] tracking-[-0.03em] tabular-nums text-text-primary">
               {formatCountdown(secondsRemaining)}
             </dd>
           </div>
           <div className="pl-5">
-            <dt className="type-label text-text-muted">Creator Pool</dt>
+            <dt className="type-label text-text-muted">Allocation pool</dt>
             <dd className="mt-3 text-[20px] font-medium tabular-nums text-lime">18.63 SOL</dd>
           </div>
         </dl>

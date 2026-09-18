@@ -34,13 +34,13 @@ export function SignalFeedItem({
       initial={reduceMotion ? false : { opacity: 0, y: fresh ? -6 : 4 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: reduceMotion ? 0 : 0.36, ease: [0.22, 1, 0.36, 1] }}
-      className="overflow-hidden rounded-[26px] border border-border bg-bg-elevated/72 shadow-[0_10px_34px_rgba(16,35,23,0.045)]"
+      className="overflow-hidden rounded-[14px] border border-border bg-bg-elevated shadow-[0_16px_50px_rgba(0,0,0,0.16)]"
     >
       {signal.hot ? (
         <div className="flex items-center justify-between border-b border-border px-7 py-3">
-          <p className="type-label text-lime">Hot Signal</p>
+          <p className="type-label text-lime">High velocity event</p>
           <p className="font-mono text-[9px] uppercase tracking-[0.1em] text-text-muted">
-            Impact {signal.impact} <span className="ml-4 text-lime">Velocity +{signal.velocity}%</span>
+            Score {signal.impact} <span className="ml-4 text-lime">Velocity +{signal.velocity}%</span>
           </p>
         </div>
       ) : null}
@@ -60,7 +60,7 @@ export function SignalFeedItem({
           </div>
         </div>
         <div className="text-right">
-          <p className="type-label text-text-muted">Creator Impact</p>
+          <p className="type-label text-text-muted">Contribution</p>
           <data className="mt-2 block text-[15px] font-medium tabular-nums text-text-secondary">
             {creator.donScore}
           </data>
@@ -73,16 +73,16 @@ export function SignalFeedItem({
         </p>
 
         {signal.media ? (
-          <div className="mt-5 grid min-h-[158px] grid-cols-1 items-end gap-7 rounded-[22px] border border-[#102317]/12 bg-[#dff5dc] p-7 text-[#102317] sm:grid-cols-[1.15fr_0.85fr] sm:gap-0">
+          <div className="mt-5 grid min-h-[158px] grid-cols-1 items-end gap-7 rounded-[12px] border border-lime/20 bg-[#1c2e20] p-7 text-text-primary sm:grid-cols-[1.15fr_0.85fr] sm:gap-0">
             <div>
-              <p className="type-label text-[#102317]/52">{signal.media.kicker}</p>
-              <p className="mt-6 font-display text-[40px] leading-[0.92] tracking-[-0.05em] text-[#102317]">
+              <p className="type-label text-lime">{signal.media.kicker}</p>
+              <p className="mt-6 font-display text-[40px] leading-[0.92] tracking-[-0.05em] text-text-primary">
                 {signal.media.headline}
               </p>
             </div>
-            <div className="border-t border-[#102317]/15 pt-5 sm:border-l sm:border-t-0 sm:pl-7 sm:pt-0">
-              <span className="mb-4 block h-1 w-9 rounded-full bg-[#102317]" />
-              <p className="max-w-[240px] text-[13px] leading-5 text-[#102317]/68">
+            <div className="border-t border-border pt-5 sm:border-l sm:border-t-0 sm:pl-7 sm:pt-0">
+              <span className="mb-4 block h-1 w-9 rounded-full bg-lime" />
+              <p className="max-w-[240px] text-[13px] leading-5 text-text-secondary">
                 {signal.media.note}
               </p>
             </div>
@@ -111,19 +111,19 @@ export function SignalFeedItem({
         </div>
         <div className="border-l border-border pl-5">
           <dd className="text-[21px] font-medium tabular-nums text-text-primary">{signal.impact}</dd>
-          <dt className="mt-2 text-[10px] text-text-muted">Impact</dt>
+          <dt className="mt-2 text-[10px] text-text-muted">Contribution</dt>
         </div>
         <div className="border-l border-border pl-5">
           <dd className="text-[21px] font-medium tabular-nums text-lime">
             {formatSol(signal.estimatedCut)}
           </dd>
-          <dt className="mt-2 text-[10px] text-text-muted">Estimated cut</dt>
+          <dt className="mt-2 text-[10px] text-text-muted">Estimated share</dt>
         </div>
       </dl>
 
       <footer className="flex items-center justify-between px-7 py-4">
         <div className="flex items-center gap-7 font-mono text-[8px] uppercase tracking-[0.1em] text-text-muted">
-          <p>Signal ID <span className="ml-1.5 text-text-secondary">#{signal.id.replace("live-", "")}</span></p>
+          <p>Event ID <span className="ml-1.5 text-text-secondary">#{signal.id.replace("live-", "")}</span></p>
           <p>Detected <span className="ml-1.5 text-text-secondary">{signal.timestamp}</span></p>
         </div>
         <p className={`flex items-center gap-2 text-[9px] font-semibold uppercase tracking-[0.11em] ${statusStyles[signal.status]}`}>

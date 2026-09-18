@@ -58,12 +58,12 @@ export const initialRewardSummary: RewardSummary = {
 };
 
 export const initialRewardSignals: RewardSignal[] = [
-  { id: "#5012", status: "tracking", impact: 842, reach: 18_400, reward: 0.0421, estimated: true, cut: "#0043", excerpt: "Creators should own part of the attention they create." },
-  { id: "#5004", status: "scored", impact: 816, reach: 16_200, reward: 0.0364, estimated: true, cut: "#0043", excerpt: "Distribution becomes infrastructure when attribution is visible." },
-  { id: "#4988", status: "paid", impact: 791, reach: 14_800, reward: 0.0382, estimated: false, cut: "#0042", excerpt: "Markets already price liquidity. Credible attention should be next." },
-  { id: "#4961", status: "paid", impact: 724, reach: 9_400, reward: 0.0218, estimated: false, cut: "#0042", excerpt: "A useful signal can travel much further than its original post." },
-  { id: "#4937", status: "paid", impact: 768, reach: 12_100, reward: 0.0274, estimated: false, cut: "#0041", excerpt: "The creator layer is part of the market, not decoration around it." },
-  { id: "#4912", status: "paid", impact: 706, reach: 8_700, reward: 0.0186, estimated: false, cut: "#0040", excerpt: "Transparent rewards make contribution legible." },
+  { id: "#5012", status: "tracking", impact: 842, reach: 18_400, reward: 0.0421, estimated: true, cut: "#0043", excerpt: "Event response is increasing across the tracked audience." },
+  { id: "#5004", status: "scored", impact: 816, reach: 16_200, reward: 0.0364, estimated: true, cut: "#0043", excerpt: "Contribution scored and awaiting the current distribution cycle." },
+  { id: "#4988", status: "paid", impact: 791, reach: 14_800, reward: 0.0382, estimated: false, cut: "#0042", excerpt: "Allocation finalized and attached to the event record." },
+  { id: "#4961", status: "paid", impact: 724, reach: 9_400, reward: 0.0218, estimated: false, cut: "#0042", excerpt: "Verified reach carried through to the completed cycle." },
+  { id: "#4937", status: "paid", impact: 768, reach: 12_100, reward: 0.0274, estimated: false, cut: "#0041", excerpt: "Measured response produced a contributor allocation." },
+  { id: "#4912", status: "paid", impact: 706, reach: 8_700, reward: 0.0186, estimated: false, cut: "#0040", excerpt: "The completed distribution is visible in Records." },
 ];
 
 export const rewardPayouts: RewardPayout[] = [
@@ -84,10 +84,10 @@ export const rewardBreakdown: RewardBreakdown = {
 };
 
 export const initialRewardActivity: RewardActivity[] = [
-  { id: "activity-5012", label: "Signal #5012 entered Tracking", detail: "Estimated Cut +0.0012 SOL", time: "2m ago", status: "live" },
-  { id: "activity-score", label: "Creator Impact +2", detail: "Creator reputation updated", time: "18m ago" },
-  { id: "activity-0042", label: "Cut #0042 settled", detail: "0.0874 SOL paid", time: "1h ago" },
-  { id: "activity-4988", label: "Signal #4988 paid", detail: "Settlement #0048", time: "1h ago" },
+  { id: "activity-5012", label: "Event #5012 entered tracking", detail: "Estimated allocation +0.0012 SOL", time: "2m ago", status: "live" },
+  { id: "activity-score", label: "Contribution score +2", detail: "Contributor profile updated", time: "18m ago" },
+  { id: "activity-0042", label: "Cycle #0042 completed", detail: "0.0874 SOL modeled", time: "1h ago" },
+  { id: "activity-4988", label: "Event #4988 distributed", detail: "Record #0048", time: "1h ago" },
 ];
 
 export const personalPerformance = {

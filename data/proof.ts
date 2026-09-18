@@ -201,26 +201,26 @@ export const infrastructureDetails: InfrastructureStatus[] = [
   { label: "Native Gas", value: "SOL", real: true },
   { label: "Runtime", value: "SVM", real: true },
   { label: "Explorer", value: "Solana Explorer", real: true },
-  { label: "Network Status", value: "Operational", real: false },
+  { label: "Scenario status", value: "Simulated", real: false },
 ];
 
 export const protocolPrograms = [
-  { label: "Creator Pool", stage: "Prototype", deployment: "Not deployed" },
-  { label: "Fee Router", stage: "Prototype", deployment: "Not deployed" },
-  { label: "Settlement Router", stage: "Prototype", deployment: "Not deployed" },
+  { label: "Allocation pool", stage: "Prototype", deployment: "Not deployed" },
+  { label: "Fee model", stage: "Prototype", deployment: "Not deployed" },
+  { label: "Distribution router", stage: "Prototype", deployment: "Not deployed" },
 ] as const;
 
 export const systemStatuses = [
-  { label: "Signal Indexer", status: "Operational", mocked: true },
-  { label: "Scoring Engine", status: "Operational", mocked: true },
-  { label: "Settlement Engine", status: "Operational", mocked: true },
-  { label: "Solana", status: "Operational", mocked: true },
+  { label: "Event indexer", status: "Simulated", mocked: true },
+  { label: "Contribution engine", status: "Simulated", mocked: true },
+  { label: "Distribution engine", status: "Simulated", mocked: true },
+  { label: "Solana network state", status: "Simulated", mocked: true },
 ] as const;
 
 export const initialProtocolActivity: ProtocolActivity[] = [
-  { id: "activity-0051", timestamp: "14:42:18", event: "Settlement #0051 completed", detail: "@mira_eth", amount: "0.0382 SOL" },
-  { id: "activity-pool", timestamp: "14:42:09", event: "Creator Pool", detail: "Fee allocation received", amount: "+0.0018 SOL" },
-  { id: "activity-signal", timestamp: "14:41:54", event: "Signal #5021 locked", detail: "Impact 842" },
-  { id: "activity-cut", timestamp: "14:41:32", event: "Cut #0043", detail: "184 eligible Signals" },
-  { id: "activity-score", timestamp: "14:41:08", event: "Scoring pass completed", detail: "61 eligible creators" },
+  { id: "activity-0051", timestamp: "14:42:18", event: "Record #0051 completed", detail: "@mira_eth", amount: "0.0382 SOL" },
+  { id: "activity-pool", timestamp: "14:42:09", event: "Allocation pool", detail: "Modeled fee allocation", amount: "+0.0018 SOL" },
+  { id: "activity-signal", timestamp: "14:41:54", event: "Event #5021 locked", detail: "Contribution 842" },
+  { id: "activity-cut", timestamp: "14:41:32", event: "Cycle #0043", detail: "184 eligible events" },
+  { id: "activity-score", timestamp: "14:41:08", event: "Scoring pass completed", detail: "61 eligible contributors" },
 ];

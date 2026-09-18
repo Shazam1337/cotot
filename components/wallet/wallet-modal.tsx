@@ -75,7 +75,7 @@ export function WalletModal({ open, onClose }: { open: boolean; onClose: () => v
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: reduceMotion ? 0 : 4 }}
             transition={{ duration: reduceMotion ? 0 : 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="theme-dark relative w-full max-w-[430px] border border-border-strong bg-[#10231d] shadow-[0_24px_80px_rgba(0,0,0,0.48)]"
+            className="theme-dark relative w-full max-w-[430px] border border-border-strong bg-[#111a13] shadow-[0_24px_80px_rgba(0,0,0,0.48)]"
           >
             <div className="flex items-start justify-between border-b border-border px-7 py-6">
               <div>
@@ -84,10 +84,10 @@ export function WalletModal({ open, onClose }: { open: boolean; onClose: () => v
                   id="wallet-dialog-heading"
                   className="mt-4 text-[24px] font-semibold tracking-[-0.035em] text-text-primary"
                 >
-                  Connect to COTOT
+                  Connect to ONIX
                 </h2>
                 <p className="mt-2 text-[13px] leading-5 text-text-secondary">
-                  Connect a Solana wallet to enter the network.
+                  Connect a Solana wallet to explore the ONIX earnings prototype.
                 </p>
               </div>
               <button
@@ -156,7 +156,7 @@ export function WalletModal({ open, onClose }: { open: boolean; onClose: () => v
             </div>
 
             <div className="flex items-center justify-between border-t border-border px-7 py-4 font-mono text-[8px] uppercase tracking-[0.1em] text-text-muted">
-              <span>Solana Mainnet</span>
+              <span>Solana wallet</span>
               <span>Connection only · no signing</span>
             </div>
           </motion.div>

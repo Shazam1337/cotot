@@ -2,56 +2,18 @@ import Image from "next/image";
 import Link from "next/link";
 import { Container } from "@/components/layout/container";
 import { HeaderNavigation } from "@/components/layout/header-navigation";
-import { LiveDot } from "@/components/ui/live-dot";
 import { WalletButton } from "@/components/wallet/wallet-button";
-import cototLogo from "@/public/assets/brand/ChatGPT Image 9 сент. 2026 г., 16_03_37.png";
-import { COTOT_X_URL } from "@/lib/constants";
 
 export function SiteHeader() {
-  return (
-    <header className="sticky top-0 z-30 h-[68px] border-b border-border bg-bg/88 backdrop-blur-xl">
-      <Container className="grid h-full grid-cols-[1fr_auto] items-center gap-5 md:grid-cols-[190px_1fr_auto]">
-        <Link
-          href="/"
-          aria-label="COTOT home"
-          className="flex w-fit items-center gap-3"
-        >
-          <Image
-            src={cototLogo}
-            alt="COTOT"
-            loading="eager"
-            className="size-[47px] rounded-[13px] object-cover"
-          />
-          <span className="text-[34px] font-bold leading-none tracking-[-0.03em] text-text-primary">COTOT</span>
-        </Link>
-
-        <HeaderNavigation />
-
-        <div className="flex items-center justify-end gap-3">
-          <span className="type-label hidden items-center gap-2 text-[#23833c] lg:flex">
-            <LiveDot />
-            Live
-          </span>
-
-          <WalletButton />
-
-          <a
-            href={COTOT_X_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Open COTOT on X"
-            className="hidden size-9 shrink-0 place-items-center text-text-secondary transition-colors duration-200 hover:text-text-primary focus-visible:text-text-primary focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-text-primary lg:grid"
-          >
-            <svg
-              aria-hidden="true"
-              viewBox="0 0 24 24"
-              className="size-[27px] fill-current"
-            >
-              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.45-6.231Zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77Z" />
-            </svg>
-          </a>
-        </div>
-      </Container>
-    </header>
-  );
+  return <header className="sticky top-0 z-30 border-b border-border bg-[#151412]/95 backdrop-blur-xl">
+    <Container className="flex h-[88px] items-center justify-between gap-2 xl:h-[104px]">
+      <Link href="/" aria-label="ONIX home" className="flex shrink-0 items-center">
+        <Image src="/assets/logo.png" alt="" width={88} height={88} priority className="size-[72px] object-contain xl:size-[88px]" />
+        <span className="relative block h-14 w-[145px] shrink-0 overflow-hidden xl:h-16 xl:w-[190px]"><Image src="/assets/label.png" alt="" width={2172} height={724} priority className="absolute left-1/2 top-1/2 h-auto w-[220px] max-w-none -translate-x-1/2 -translate-y-1/2 xl:w-[270px]" /></span>
+      </Link>
+      <HeaderNavigation/>
+      <div className="flex shrink-0 items-center gap-2 sm:gap-3"><Link href="/wire" aria-label="Open ONIX activity" className="hidden size-11 place-items-center rounded-md border border-border bg-surface text-text-secondary hover:text-lime sm:grid"><svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" className="size-5"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932zm-1.291 19.49h2.04L6.486 3.24H4.298z"/></svg></Link><WalletButton/></div>
+    </Container>
+    <div className="border-t border-border xl:hidden"><Container><HeaderNavigation mobile/></Container></div>
+  </header>;
 }

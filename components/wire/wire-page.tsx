@@ -20,17 +20,17 @@ type WireSort = "latest" | "impact" | "reach" | "reward";
 
 const filters: { label: string; value: WireFilter }[] = [
   { label: "All", value: "all" },
-  { label: "Live", value: "live" },
+  { label: "Active", value: "live" },
   { label: "Tracking", value: "tracking" },
-  { label: "Scored", value: "scored" },
-  { label: "Paid", value: "paid" },
+  { label: "Measured", value: "scored" },
+  { label: "Distributed", value: "paid" },
 ];
 
 const sorts: { label: string; value: WireSort }[] = [
   { label: "Latest", value: "latest" },
-  { label: "Impact", value: "impact" },
+  { label: "Contribution", value: "impact" },
   { label: "Reach", value: "reach" },
-  { label: "Reward", value: "reward" },
+  { label: "Allocation", value: "reward" },
 ];
 
 const liveStatuses: DemoSignalStatus[] = ["detected", "verified", "tracking"];
@@ -161,32 +161,32 @@ export function WirePage() {
           <div className="lg:col-span-8">
             <p className="type-label flex items-center gap-3 text-text-muted">
               <span className="h-px w-9 bg-lime" />
-              Signal intelligence
+              Activity monitor / Demo
             </p>
             <h1 id="wire-page-heading" className="type-section-title mt-6 text-text-primary">
-              Live Signals
+              Activity
             </h1>
             <p className="mt-7 text-[20px] leading-[1.38] tracking-[-0.015em] text-text-secondary">
-              Follow creator attention from detection to settlement.
+              Inspect attributed events as they move through detection, measurement, and distribution.
             </p>
           </div>
 
           <div className="flex justify-start pb-1 lg:col-span-4 lg:justify-end">
             <div className="min-w-[190px] border-l border-border pl-5">
               <p className="type-label flex items-center gap-2 text-lime">
-                <LiveDot /> Live
+                <LiveDot /> Simulated feed
               </p>
-              <p className="mt-3 text-[12px] text-text-secondary">1,284 signals tracked</p>
+              <p className="mt-3 text-[12px] text-text-secondary">1,284 events in this scenario</p>
               <p className="mt-1.5 font-mono text-[9px] uppercase tracking-[0.1em] text-text-muted">
-                Updated just now
+                Prototype data
               </p>
             </div>
           </div>
         </div>
 
-        <div className="mt-14 border-y border-border">
+        <div className="wire-controls mt-14 border-y border-border">
           <div className="grid h-[68px] grid-cols-[1fr_300px] items-center gap-10">
-            <div className="flex h-full items-center gap-7" role="group" aria-label="Signal status filter">
+            <div className="wire-filters flex h-full items-center gap-7" role="group" aria-label="Event status filter">
               {filters.map((filter) => {
                 const active = activeFilter === filter.value;
                 return (
@@ -212,7 +212,7 @@ export function WirePage() {
 
             <label className="flex h-9 items-center gap-3 border-b border-border-strong text-text-muted focus-within:border-lime/70 focus-within:text-text-secondary">
               <Search aria-hidden="true" className="size-3.5 shrink-0" strokeWidth={1.6} />
-              <span className="sr-only">Search creators</span>
+              <span className="sr-only">Search contributors</span>
               <input
                 type="search"
                 value={search}
@@ -220,13 +220,13 @@ export function WirePage() {
                   setSearch(event.target.value);
                   setVisibleCount(9);
                 }}
-                placeholder="Search creators"
+                placeholder="Search contributors"
                 className="h-full min-w-0 flex-1 bg-transparent text-[13px] text-text-primary outline-none placeholder:text-text-muted"
               />
             </label>
           </div>
 
-          <div className="flex h-[46px] items-center justify-end gap-5 border-t border-border">
+          <div className="wire-sorts flex h-[46px] items-center justify-end gap-5 border-t border-border">
             <span className="type-label mr-2 text-text-muted">Sort</span>
             {sorts.map((sort) => (
               <button
@@ -259,7 +259,7 @@ export function WirePage() {
 
             {visibleSignals.length === 0 ? (
               <p className="border-y border-border py-16 text-center text-[14px] text-text-muted">
-                No signals found.
+                No events match these filters.
               </p>
             ) : null}
 
@@ -270,7 +270,7 @@ export function WirePage() {
                 onClick={() => setVisibleCount((current) => current + 3)}
                 className="cursor-pointer text-[12px] font-medium text-text-secondary transition-colors duration-200 hover:text-text-primary disabled:cursor-default disabled:text-text-muted/45"
               >
-                Load more signals <span aria-hidden="true">↓</span>
+                Load more events <span aria-hidden="true">↓</span>
               </button>
             </div>
           </div>

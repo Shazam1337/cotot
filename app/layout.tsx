@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { SiteHeader } from "@/components/layout/site-header";
 import { WalletProvider } from "@/components/wallet/wallet-provider";
-import cototLogo from "@/public/assets/brand/ChatGPT Image 9 сент. 2026 г., 16_03_37.png";
 import "./globals.css";
 
 const supreme = localFont({
@@ -22,20 +21,13 @@ const supreme = localFont({
   display: "swap",
 });
 
-const kulagSha = localFont({
-  src: "../components/KULAG SHA/KULAG SHA.otf",
-  variable: "--font-kulag-sha",
-  display: "swap",
-  weight: "400",
-});
-
 export const metadata: Metadata = {
-  title: "COTOT — Proof of Attention",
-  description: "Measure creator impact and share network value transparently on Solana.",
-  icons: {
-    icon: [{ url: cototLogo.src, type: "image/png" }],
-    shortcut: [{ url: cototLogo.src, type: "image/png" }],
-  },
+  applicationName: "ONIX",
+  title: { default: "ONIX — Signal to value infrastructure", template: "%s | ONIX" },
+  description: "ONIX tracks public activity, measures contribution, and makes value distribution visible from event to record.",
+  openGraph: { title: "ONIX — Signal to value infrastructure", description: "Track activity. Measure contribution. Inspect distribution.", siteName: "ONIX", type: "website" },
+  twitter: { card: "summary_large_image", title: "ONIX — Signal to value infrastructure", description: "Track activity. Measure contribution. Inspect distribution." },
+  icons: { icon: { url: "/assets/logo.png", type: "image/png" }, apple: "/assets/logo.png" },
 };
 
 export default function RootLayout({
@@ -44,7 +36,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${supreme.variable} ${kulagSha.variable}`}>
+    <html lang="en" className={supreme.variable}>
       <body>
         <WalletProvider>
           <div className="site-shell">

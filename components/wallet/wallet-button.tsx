@@ -47,7 +47,7 @@ export function WalletButton() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: reduceMotion ? 0 : 0.16 }}
-            className="flex h-9 cursor-pointer items-center gap-2.5 rounded-[3px] border border-[#385629] bg-[#102317] px-3.5 font-mono text-[11px] text-text-primary transition-colors duration-200 hover:border-[#4a7140] hover:bg-[#142a1b] focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-lime"
+            className="flex h-11 cursor-pointer items-center gap-2.5 rounded-[5px] border border-[#385629] bg-[#102317] px-3.5 font-mono text-[15px] text-text-primary transition-colors duration-200 hover:border-[#4a7140] hover:bg-[#142a1b] focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-lime"
           >
             <LiveDot />
             <span className="sm:hidden">Wallet</span>
@@ -68,9 +68,9 @@ export function WalletButton() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: reduceMotion ? 0 : 0.16 }}
-            className="flex h-9 cursor-pointer items-center gap-2 rounded-[3px] border border-border-strong bg-surface/50 px-3.5 font-sans text-[12px] font-medium text-text-primary transition-colors duration-200 hover:border-white/25 hover:bg-surface-hover disabled:cursor-wait disabled:text-text-muted focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-lime"
+            className="flex h-11 cursor-pointer items-center gap-2 rounded-[5px] border border-[#f2f0eb] bg-[#f2f0eb] px-3.5 font-sans text-[18px] font-semibold text-[#181816] transition-colors duration-200 hover:border-white hover:bg-white disabled:cursor-wait disabled:text-[#777] focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-lime"
           >
-            <Wallet aria-hidden="true" className="size-3.5 text-text-secondary" strokeWidth={1.7} />
+            <Wallet aria-hidden="true" className="size-3.5 text-[#181816]" strokeWidth={1.7} />
             <span className="sm:hidden">{isReconnecting ? "Restoring" : "Connect"}</span>
             <span className="hidden sm:inline">{isReconnecting ? "Restoring Wallet" : "Connect Wallet"}</span>
           </motion.button>

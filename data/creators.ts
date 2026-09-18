@@ -144,7 +144,7 @@ export const creatorNetworkSummaries: Record<CreatorRange, CreatorNetworkSummary
 
 export const risingCreators = [
   { creatorId: "kate", movement: 14, detail: "+22% reach", activity: "3 live signals" },
-  { creatorId: "harvey", movement: 9, detail: "+18% Impact", activity: "Network velocity" },
+  { creatorId: "harvey", movement: 9, detail: "+18% contribution", activity: "Network velocity" },
   { creatorId: "fox", movement: 7, detail: "Avg Impact 812", activity: "3 live signals" },
   { creatorId: "lucas", movement: 6, detail: "0.0682 SOL earned", activity: "This week" },
 ] as const;
